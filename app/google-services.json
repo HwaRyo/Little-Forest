@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "761020189351",
+    "project_id": "little-forest-80fa3",
+    "storage_bucket": "little-forest-80fa3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:761020189351:android:55e472bad5b208123ae982",
+        "android_client_info": {
+          "package_name": "com.codingpotetoes.littleforest"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "761020189351-sdbpeqq4g3i7lq7doifo21kohkhs9hnt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD6ijxOqun-eSqr4IHiMQCRBMxzIi69EDY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "761020189351-sdbpeqq4g3i7lq7doifo21kohkhs9hnt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
