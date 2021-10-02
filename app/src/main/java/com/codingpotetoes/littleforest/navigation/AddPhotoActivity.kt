@@ -3,124 +3,120 @@ package com.codingpotetoes.littleforest
 import android.app.Activity
 import android.content.Intent
 import android.net.Uri
+import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Button
-import android.widget.EditText
-import android.widget.ImageView
-import androidx.activity.result.contract.ActivityResultContracts
+import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.google.android.gms.tasks.Task
+import com.codingpotetoes.littleforest.R
+import com.codingpotetoes.littleforest.model.ContentDTO
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
-import com.google.firebase.storage.UploadTask
 import kotlinx.android.synthetic.main.activity_add_photo.*
 import java.text.SimpleDateFormat
 import java.util.*
 
-
 class AddPhotoActivity : AppCompatActivity() {
-    var storage : FirebaseStorage ?= null
-    var photoUri : Uri? = null
-    var auth : FirebaseAuth? = null
-    var firestore : FirebaseFirestore? = null
+
+    val PICK_IMAGE_FROM_ALBUM = 0
+
+    var photoUri: Uri? = null
+
+    var storage: FirebaseStorage? = null
+    var firestore: FirebaseFirestore? = null
+    private var auth: FirebaseAuth? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_photo)
 
-        //Init
+        // Firebase storage
         storage = FirebaseStorage.getInstance()
-        auth = FirebaseAuth.getInstance()
+        // Firebase Database
         firestore = FirebaseFirestore.getInstance()
+        // Firebase Auth
+        auth = FirebaseAuth.getInstance()
 
-
-        //Open the album
-        var photoPickerIntent = Intent(Intent.ACTION_PICK)
+        val photoPickerIntent = Intent(Intent.ACTION_PICK)
         photoPickerIntent.type = "image/*"
-        launcher.launch(photoPickerIntent);
+        startActivityForResult(photoPickerIntent, PICK_IMAGE_FROM_ALBUM)
 
-        //add image upload event
+        addphoto_image.setOnClickListener {
+            val photoPickerIntent = Intent(Intent.ACTION_PICK)
+            photoPickerIntent.type = "image/*"
+            startActivityForResult(photoPickerIntent, PICK_IMAGE_FROM_ALBUM)
+        }
+
         addphoto_btn_upload.setOnClickListener {
             contentUpload()
         }
+
     }
 
-    val launcher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
-            result ->
-        if (result.resultCode == Activity.RESULT_OK) {
-            //This is path to the selected image
-            photoUri = result.data?.data
-            addphoto_image.setImageURI(photoUri)
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
 
-        } else {
-            // Exit the addPhotoActivity if you leave the album without selecting it
-            finish()
-        }
-    }
 
-    fun contentUpload() {
-        //Make filename
+        if (requestCode == PICK_IMAGE_FROM_ALBUM) {
+            //이미지 선택시
+            if(resultCode == Activity.RESULT_OK){
+                //이미지뷰에 이미지 세팅
+                println(data?.data)
+                photoUri = data?.data
+                addphoto_image.setImageURI(data?.data)
+            }
 
-        var timestamp = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
-        var imageFileName = "IMAGE_" + timestamp + "_.png"
-
-        var storageRef = storage?.reference?.child("images")?.child(imageFileName)
-
-        // 두 가지 방식 중 가독성이 좋은 것 택
-        //Promise method -> 더 보편적
-        storageRef?.putFile(photoUri!!)?.continueWithTask { task: Task<UploadTask.TaskSnapshot>->
-            return@continueWithTask storageRef.downloadUrl
-        }?.addOnSuccessListener { uri ->
-            var contentDTO = ContentDTO()
-
-            //Insert downloadUrl of image
-            contentDTO.imageUrl = uri.toString()
-
-            //Insert uid of user
-            contentDTO.uid = auth?.currentUser?.uid
-
-            //Insert userId
-            contentDTO.userId = auth?.currentUser?.email
-
-            //Insert explain of content
-            contentDTO.explain = addphoto_edit_explain.text.toString()
-
-            //Insert timestamp
-            contentDTO.timestamp = System.currentTimeMillis()
-
-            firestore?.collection("images")?.document()?.set(contentDTO)
-
-            setResult(Activity.RESULT_OK)
-            finish()
-        }
-
-/*        //Callback method
-        storageRef?.putFile(photoUri!!)?.addOnSuccessListener {
-            storageRef.downloadUrl.addOnSuccessListener { uri ->
-                var contentDTO = ContentDTO()
-
-                //Insert downloadUrl of image
-                contentDTO.imageUrl = uri.toString()
-
-                //Insert uid of user
-                contentDTO.uid = auth?.currentUser?.uid
-
-                //Insert userId
-                contentDTO.userId = auth?.currentUser?.email
-
-                //Insert explain of content
-                contentDTO.explain = addphoto_edit_explain.text.toString()
-
-                //Insert timestamp
-                contentDTO.timestamp = System.currentTimeMillis()
-
-                firestore?.collection("images")?.document()?.set(contentDTO)
-
-                setResult(Activity.RESULT_OK)
+            else{
                 finish()
             }
+
         }
-*/
     }
+
+    fun contentUpload(){
+        progress_bar.visibility = View.VISIBLE
+
+        val timeStamp = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
+        val imageFileName = "JPEG_" + timeStamp + "_.png"
+        val storageRef = storage?.reference?.child("images")?.child(imageFileName)
+        storageRef?.putFile(photoUri!!)?.addOnSuccessListener{ taskSnapshot ->
+                    progress_bar.visibility = View.GONE
+
+                    Toast.makeText(this, getString(R.string.upload_success),
+                            Toast.LENGTH_SHORT).show()
+
+                    val uri = taskSnapshot.downloadUrl
+                    //디비에 바인딩 할 위치 생성 및 컬렉션(테이블)에 데이터 집합 생성
+
+
+                    //시간 생성
+                    val contentDTO = ContentDTO()
+
+                    //이미지 주소
+                    contentDTO.imageUrl = uri!!.toString()
+                    //유저의 UID
+                    contentDTO.uid = auth?.currentUser?.uid
+                    //게시물의 설명
+                    contentDTO.explain = addphoto_edit_explain.text.toString()
+                    //유저의 아이디
+                    contentDTO.userId = auth?.currentUser?.email
+                    //게시물 업로드 시간
+                    contentDTO.timestamp = System.currentTimeMillis()
+
+                    //게시물을 데이터를 생성 및 엑티비티 종료
+                    firestore?.collection("images")?.document()?.set(contentDTO)
+
+                    setResult(Activity.RESULT_OK)
+                    finish()
+                }
+                ?.addOnFailureListener {
+                    progress_bar.visibility = View.GONE
+
+                    Toast.makeText(this, getString(R.string.upload_fail),
+                            Toast.LENGTH_SHORT).show()
+                }
+    }
+
+
 }
