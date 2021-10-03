@@ -1,19 +1,16 @@
 package com.codingpotetoes.littleforest
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
-import com.company.howl.howlstagram.R
-import com.company.howl.howlstagram.model.AlarmDTO
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ListenerRegistration
@@ -23,7 +20,7 @@ import kotlinx.android.synthetic.main.item_comment.view.*
 import java.util.ArrayList
 
 
-class AlarmFragment : Fragment() {
+class AlarmFragment : androidx.fragment.app.Fragment() {
 
     var alarmSnapshot: ListenerRegistration? = null
 
@@ -71,8 +68,8 @@ class AlarmFragment : Fragment() {
                     .document(alarmDTOList[position].uid!!).get().addOnCompleteListener {
                         task ->
                         if(task.isSuccessful){
-                            val url = task.result["image"]
-                            Glide.with(activity)
+                            val url = task.result?.get("image")
+                            Glide.with(activity!!)
                                     .load(url)
                                     .apply(RequestOptions().circleCrop())
                                     .into(profileImage)

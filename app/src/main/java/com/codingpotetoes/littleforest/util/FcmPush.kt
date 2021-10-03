@@ -1,9 +1,8 @@
 package com.codingpotetoes.littleforest
 
-import com.company.howl.howlstagram.model.PushDTO
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.gson.Gson
-import okhttp3.*
+import com.squareup.okhttp.*
 import java.io.IOException
 
 class FcmPush() {
@@ -21,7 +20,7 @@ class FcmPush() {
     fun sendMessage(destinationUid: String, title: String, message: String) {
         FirebaseFirestore.getInstance().collection("pushtokens").document(destinationUid).get().addOnCompleteListener { task ->
             if (task.isSuccessful) {
-                var token = task.result["pushtoken"].toString()
+                var token = task.result?.get("pushtoken")?.toString()
                 println(token)
                 var pushDTO = PushDTO()
                 pushDTO.to = token
@@ -37,9 +36,9 @@ class FcmPush() {
                         .post(body)
                         .build()
                 okHttpClient?.newCall(request)?.enqueue(object : Callback {
-                    override fun onFailure(call: Call?, e: IOException?) {
+                    override fun onFailure(request: Request?, e: IOException?) {
                     }
-                    override fun onResponse(call: Call?, response: Response?) {
+                    override fun onResponse(response: Response?) {
                         println(response?.body()?.string())
                     }
                 })

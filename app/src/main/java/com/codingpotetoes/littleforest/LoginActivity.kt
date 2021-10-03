@@ -57,9 +57,15 @@ class LoginActivity : AppCompatActivity() {
             }
     }
 
+    override fun onStart() {
+        super.onStart()
+        moveMainPage(auth?.currentUser)
+    }
+
     fun moveMainPage(user:FirebaseUser?){
         if(user != null) {
             startActivity(Intent(this, MainActivity::class.java))
+            finish()
         }
     }
 
