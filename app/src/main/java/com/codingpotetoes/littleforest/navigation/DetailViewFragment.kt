@@ -159,7 +159,11 @@ class DetailViewFragment : Fragment() {
             }
             //좋아요 카운터 설정
             viewHolder.detailviewitem_favoritecounter_textview.text = "좋아요 " + contentDTOs[position].favoriteCount + "개"
-
+            viewHolder.detailviewitem_comment_imageview.setOnClickListener{v ->
+                var intent = Intent(v.context,CommentActivity::class.java)
+                intent.putExtra("contentUid",contentUidList[position])
+                startActivity(intent)
+            }
         }
 
         fun favoriteAlarm(destinationUid: String) {
