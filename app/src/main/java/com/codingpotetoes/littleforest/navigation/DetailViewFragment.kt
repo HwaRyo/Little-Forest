@@ -3,24 +3,29 @@ package com.codingpotetoes.littleforest
 
 import android.content.Intent
 import android.os.Bundle
+import android.support.v4.app.Fragment
+import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.company.howl.howlstagram.MainActivity
+import com.company.howl.howlstagram.R
+import com.company.howl.howlstagram.model.AlarmDTO
+import com.company.howl.howlstagram.model.ContentDTO
+import com.company.howl.howlstagram.model.FollowDTO
+import com.company.howl.howlstagram.util.FcmPush
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ListenerRegistration
-import com.squareup.okhttp.OkHttpClient
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.item_detail.view.*
 import kotlinx.android.synthetic.main.fragment_detail.view.*
-
+import kotlinx.android.synthetic.main.item_detail.view.*
+import okhttp3.*
 import java.util.*
 
 
