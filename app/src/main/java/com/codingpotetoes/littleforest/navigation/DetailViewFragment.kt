@@ -35,6 +35,7 @@ class DetailViewFragment : Fragment() {
     var firestore: FirebaseFirestore? = null
     var imagesSnapshot: ListenerRegistration? = null
     var okHttpClient: OkHttpClient? = null
+    var fcmPush: FcmPush? = null
     var mainView: View? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -42,16 +43,17 @@ class DetailViewFragment : Fragment() {
         user = FirebaseAuth.getInstance().currentUser
         firestore = FirebaseFirestore.getInstance()
         okHttpClient = OkHttpClient()
+        fcmPush = FcmPush()
 
         //리사이클러 뷰와 어뎁터랑 연결
         mainView = inflater.inflate(R.layout.fragment_detail, container, false)
+
 
         return mainView
     }
 
     override fun onResume() {
         super.onResume()
-
         mainView?.detailviewfragment_recyclerview?.layoutManager = LinearLayoutManager(activity)
         mainView?.detailviewfragment_recyclerview?.adapter = DetailRecyclerViewAdapter()
         var mainActivity = activity as MainActivity
@@ -75,7 +77,7 @@ class DetailViewFragment : Fragment() {
             var uid = FirebaseAuth.getInstance().currentUser?.uid
             firestore?.collection("users")?.document(uid!!)?.get()?.addOnCompleteListener { task ->
                 if (task.isSuccessful) {
-                    var userDTO = task.result?.toObject(FollowDTO::class.java)
+                    var userDTO = task.result.toObject(FollowDTO::class.java)
                     if (userDTO?.followings != null) {
                         getCotents(userDTO?.followings)
                     }
@@ -117,7 +119,7 @@ class DetailViewFragment : Fragment() {
                     ?.get()?.addOnCompleteListener { task ->
                         if (task.isSuccessful) {
 
-                            val url = task.result?.get("image")
+                            val url = task.result["image"]
                             Glide.with(holder.itemView.context)
                                     .load(url)
                                     .apply(RequestOptions().circleCrop()).into(viewHolder.detailviewitem_profile_image)
@@ -165,6 +167,13 @@ class DetailViewFragment : Fragment() {
             //좋아요 카운터 설정
             viewHolder.detailviewitem_favoritecounter_textview.text = "좋아요 " + contentDTOs[position].favoriteCount + "개"
 
+            viewHolder.detailviewitem_comment_imageview.setOnClickListener {
+                val intent = Intent(activity, CommentActivity::class.java)
+                intent.putExtra("contentUid", contentUidList[position])
+                intent.putExtra("destinationUid", contentDTOs[position].uid)
+                startActivity(intent)
+            }
+
         }
 
         fun favoriteAlarm(destinationUid: String) {
@@ -178,6 +187,7 @@ class DetailViewFragment : Fragment() {
 
             FirebaseFirestore.getInstance().collection("alarms").document().set(alarmDTO)
             var message = user?.email + getString(R.string.alarm_favorite)
+            fcmPush?.sendMessage(destinationUid, "알림 메세지 입니다.", message)
         }
 
         override fun getItemCount(): Int {
