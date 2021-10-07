@@ -26,7 +26,6 @@ class CommentActivity : AppCompatActivity() {
     var contentUid: String? = null
     var user: FirebaseUser? = null
     var destinationUid: String? = null
-    var fcmPush: FcmPush? = null
     var commentSnapshot: ListenerRegistration? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,7 +34,6 @@ class CommentActivity : AppCompatActivity() {
         user = FirebaseAuth.getInstance().currentUser
         destinationUid = intent.getStringExtra("destinationUid")
         contentUid = intent.getStringExtra("contentUid")
-        fcmPush = FcmPush()
 
         comment_recyclerview.adapter = CommentRecyclerViewAdapter()
         comment_recyclerview.layoutManager = LinearLayoutManager(this)
@@ -79,10 +77,6 @@ class CommentActivity : AppCompatActivity() {
         alarmDTO.message = message
         alarmDTO.timestamp = System.currentTimeMillis()
 
-        FirebaseFirestore.getInstance().collection("alarms").document().set(alarmDTO)
-
-        var message = user?.email + getString(R.string.alarm_who) + message + getString(R.string.alarm_comment)
-        fcmPush?.sendMessage(destinationUid, "알림 메세지 입니다.", message)
     }
 
 

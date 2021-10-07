@@ -15,12 +15,13 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.codingpotetoes.littleforest.R.id.*
+import com.codingpotetoes.littleforest.navigation.MainFragment
+import com.codingpotetoes.littleforest.navigation.MissionFragment
 import kotlinx.android.synthetic.main.activity_main.*
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
-
 
 
 class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener {
@@ -29,14 +30,17 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        progress_bar.visibility = View.VISIBLE
 
         // Bottom Navigation View
         bottom_navigation.setOnNavigationItemSelectedListener(this)
-        bottom_navigation.selectedItemId = R.id.action_home
+        bottom_navigation.selectedItemId = R.id.action_main
 
         // 앨범 접근 권한 요청
-        ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE), 1)
+        ActivityCompat.requestPermissions(
+            this,
+            arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),
+            1
+        )
     }
 
 
@@ -49,7 +53,21 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         setToolbarDefault()
         when (item.itemId) {
-            R.id.action_home -> {
+            R.id.action_main -> {
+                val mainFragment = MainFragment()
+                supportFragmentManager.beginTransaction()
+                    .replace(R.id.main_content, mainFragment)
+                    .commit()
+                return true
+            }
+            R.id.action_mission -> {
+                val missionFragment = MissionFragment()
+                supportFragmentManager.beginTransaction()
+                    .replace(R.id.main_content, missionFragment)
+                    .commit()
+                return true
+            }
+            R.id.action_community -> {
 
                 val detailViewFragment = DetailViewFragment()
                 supportFragmentManager.beginTransaction()
@@ -65,14 +83,21 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
                     .commit()
                 return true
             }
-            R.id.action_add_photo -> {
-                if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
-                    startActivity(Intent(this, AddPhotoActivity::class.java))
-                } else {
-                    Toast.makeText(this, "스토리지 읽기 권한이 없습니다.", Toast.LENGTH_LONG).show()
-                }
-                return true
-            }
+
+            //사진업로드 코드
+//            R.id.action_add_photo -> {
+//                if (ContextCompat.checkSelfPermission(
+//                        this,
+//                        Manifest.permission.READ_EXTERNAL_STORAGE
+//                    ) == PackageManager.PERMISSION_GRANTED
+//                ) {
+//                    startActivity(Intent(this, AddPhotoActivity::class.java))
+//                } else {
+//                    Toast.makeText(this, "스토리지 읽기 권한이 없습니다.", Toast.LENGTH_LONG).show()
+//                }
+//                return true
+//            }
+
             R.id.action_account -> {
                 val userFragment = UserFragment()
                 val uid = FirebaseAuth.getInstance().currentUser!!.uid

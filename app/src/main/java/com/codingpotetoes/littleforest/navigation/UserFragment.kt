@@ -62,7 +62,7 @@ class UserFragment : Fragment() {
             var mainactivity = (activity as MainActivity)
             mainactivity?.toolbar_username?.text = arguments?.getString("userId")
             mainactivity?.toolbar_btn_back?.setOnClickListener{
-                mainactivity.bottom_navigation.selectedItemId = R.id.action_home
+                mainactivity.bottom_navigation.selectedItemId = R.id.action_community
                 mainactivity?.toolbar_title_image?.visibility = View.VISIBLE
                 mainactivity?.toolbar_username?.visibility = View.GONE
                 mainactivity?.toolbar_btn_back?.visibility = View.GONE
