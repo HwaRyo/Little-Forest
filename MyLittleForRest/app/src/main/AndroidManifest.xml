@@ -14,7 +14,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.LittleForest">
-
+        <activity android:name=".LodingActivity"></activity>
+        <activity android:name=".SeedActivity" />
         <activity android:name=".MainActivity" />
         <activity android:name=".LoginActivity">
             <intent-filter>
@@ -23,10 +24,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity android:name=".AddPhotoActivity" />
         <activity android:name=".CommentActivity" />
-
     </application>
 
 </manifest>

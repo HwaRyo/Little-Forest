@@ -7,14 +7,15 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.beehivestudio.mylittleforrest.R;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link MainFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+
 public class MainFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
@@ -60,7 +61,18 @@ public class MainFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_main, container, false);
+        View root = inflater.inflate(R.layout.fragment_main, container, false);
+
+        TextView region = root.findViewById(R.id.region);
+        LinearLayout ll_weather = root.findViewById(R.id.ll_weather);
+        ImageView iv_weather = root.findViewById(R.id.iv_weather);
+        TextView famous_saying = root.findViewById(R.id.famous_saying);
+        ImageButton ib_plant = root.findViewById(R.id.ib_plant);
+        TextView plant_name = root.findViewById(R.id.plant_name);
+        ProgressBar exp = root.findViewById(R.id.exp);
+
+
+
+        return root;
     }
 }
