@@ -14,10 +14,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.LittleForest">
-        <activity android:name=".LodingActivity"></activity>
+        <activity android:name=".PhoneLoginActivity"></activity>
+        <activity android:name=".LodingActivity" />
         <activity android:name=".SeedActivity" />
         <activity android:name=".MainActivity" />
-        <activity android:name=".LoginActivity">
+        <activity android:name=".EmailLoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

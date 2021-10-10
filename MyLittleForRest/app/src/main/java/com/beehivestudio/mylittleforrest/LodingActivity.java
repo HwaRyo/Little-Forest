@@ -30,13 +30,16 @@ public class LodingActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 if (task.isSuccessful()) {
-                    Intent intent = new Intent(LodingActivity.this, MainActivity.class);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    LodingActivity.this.startActivity(intent);
-                } else {
-                    Intent intent = new Intent(LodingActivity.this, SeedActivity.class);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    LodingActivity.this.startActivity(intent);
+                    DocumentSnapshot document = task.getResult();
+                    if (document.getData()!=null) {
+                        Intent intent = new Intent(LodingActivity.this, MainActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        LodingActivity.this.startActivity(intent);
+                    } else {
+                        Intent intent = new Intent(LodingActivity.this, SeedActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        LodingActivity.this.startActivity(intent);
+                    }
                 }
             }
         });

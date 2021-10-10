@@ -10,7 +10,7 @@ import com.beehivestudio.mylittleforrest.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 
-class LoginActivity : AppCompatActivity() {
+class EmailLoginActivity : AppCompatActivity() {
     var auth : FirebaseAuth? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -58,10 +58,10 @@ class LoginActivity : AppCompatActivity() {
             }
     }
 
-//    override fun onStart() {
-//        super.onStart()
-//        moveMainPage(auth?.currentUser)
-//    }
+    override fun onStart() {
+        super.onStart()
+        moveMainPage(auth?.currentUser)
+    }
 
     fun moveMainPage(user:FirebaseUser?){
         if(user != null) {

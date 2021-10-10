@@ -17,8 +17,6 @@ import androidx.core.graphics.BlendModeCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.beehivestudio.mylittleforrest.LoginActivity
-import com.beehivestudio.mylittleforrest.MainActivity
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.google.android.gms.tasks.Task
@@ -51,7 +49,7 @@ class UserFragment : Fragment() {
             fragmentView?.account_btn_follow_signout?.text = getString(R.string.signout)
             fragmentView?.account_btn_follow_signout?.setOnClickListener {
                 activity?.finish()
-                startActivity(Intent(activity, LoginActivity::class.java))
+                startActivity(Intent(activity, EmailLoginActivity::class.java))
                 auth?.signOut()
             }
         } else {
