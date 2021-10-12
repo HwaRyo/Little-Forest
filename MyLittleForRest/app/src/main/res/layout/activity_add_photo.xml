@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <ProgressBar
         android:id="@+id/progress_bar"
@@ -37,41 +38,81 @@
         android:background="@color/colorDivision"
         android:orientation="horizontal" />
 
-    <!-- Contents -->
-    <ImageView
-        android:id="@+id/addphoto_image"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@id/toolbar_division"
-        android:layout_margin="8dp"
-        tools:src="@drawable/ic_account" />
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/edittext"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/toolbar_division"
-        android:layout_margin="8dp"
-        android:layout_toRightOf="@id/addphoto_image">
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
 
-        <EditText
-            android:id="@+id/addphoto_edit_explain"
+        <RadioGroup
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+
+            <RadioButton
+                android:id="@+id/rb_public"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Public"
+                android:checked="true"/>
+
+            <TextView
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"/>
+
+            <RadioButton
+                android:id="@+id/rb_private"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Private"/>
+
+        </RadioGroup>
+
+        <ImageButton
+            android:id="@+id/addphoto_image"
             android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:gravity="top"
-            android:hint="@string/hint_image_content"
-            android:inputType="text" />
-    </com.google.android.material.textfield.TextInputLayout>
+            android:layout_height="250dp"
+            android:layout_below="@id/toolbar_division"
+            android:layout_alignParentLeft="true"
+            android:adjustViewBounds="true"
+            android:scaleType="fitCenter"
+            android:layout_margin="8dp"
+            tools:src="@drawable/ic_account" />
 
-    <Button
-        android:id="@+id/addphoto_btn_upload"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/edittext"
-        android:layout_margin="8dp"
-        android:layout_toRightOf="@id/addphoto_image"
-        android:text="@string/upload_image"
-        android:theme="@style/ButtonStyle" />
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/edittext"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/toolbar_division"
+            android:layout_margin="8dp"
+            android:layout_toRightOf="@id/addphoto_image">
 
-</RelativeLayout>
+            <EditText
+                android:id="@+id/addphoto_edit_explain"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:gravity="top"
+                android:hint="글을 적어 주세요. (500자 제한)"
+                android:inputType="textMultiLine"
+                android:scrollHorizontally="false"
+                android:maxLength="1000"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/addphoto_btn_upload"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/edittext"
+            android:layout_margin="8dp"
+            android:layout_toRightOf="@id/addphoto_image"
+            android:text="UPLOAD"
+            android:theme="@style/ButtonStyle" />
+
+    </LinearLayout>
+    <!-- Contents -->
+
+
+
+
+</LinearLayout>

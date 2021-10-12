@@ -1,7 +1,12 @@
 package com.beehivestudio.mylittleforrest.navigation;
 
+import android.Manifest;
+import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -12,51 +17,35 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.beehivestudio.mylittleforrest.AddPhotoActivity;
+import com.beehivestudio.mylittleforrest.LodingActivity;
+import com.beehivestudio.mylittleforrest.MainActivity;
 import com.beehivestudio.mylittleforrest.R;
+import com.beehivestudio.mylittleforrest.SeedActivity;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 
 public class MainFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
+    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+    String uid = user.getUid();
 
-    public MainFragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment MainFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static MainFragment newInstance(String param1, String param2) {
-        MainFragment fragment = new MainFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
+    String pattern = "yyyyMMdd";
+    SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+    String date = simpleDateFormat.format(new Date());
+    int current_date = Integer.parseInt(date);
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -70,9 +59,49 @@ public class MainFragment extends Fragment {
         ImageButton ib_plant = root.findViewById(R.id.ib_plant);
         TextView plant_name = root.findViewById(R.id.plant_name);
         ProgressBar exp = root.findViewById(R.id.exp);
+        ImageButton upload = root.findViewById(R.id.bt_upload);
 
+        db.collection("Seed").document(uid).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    int attendance = Integer.parseInt(document.getString("date"));
+                    plant_name.setText(document.getString("name"));
+                    exp.setProgress(Integer.parseInt(document.getString("exp")));
+                    if (attendance - current_date <= 3) {
+                        //식물생존 식물이름에 맞는 사진 넣는 명령어
+                    } else {
+                        //식물죽음 죽음에 맞는 사진 넣는 명령어
+                    }
+                } else {/*파베에서 데이터 가져오기 실패할때*/}
+            }
+        });
 
+        ib_plant.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (exp.getProgress() == 100) {
+                    Toast.makeText(root.getContext(), "꽃을 피우신 당신 축하드립니다!", Toast.LENGTH_SHORT).show();
+                }
+                //죽은식물일때 if 만들기
+            }
+        });
 
+        upload.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // 사진업로드 코드
+                if (ContextCompat.checkSelfPermission(root.getContext(), Manifest.permission.READ_EXTERNAL_STORAGE
+                ) == PackageManager.PERMISSION_GRANTED
+                ) {
+                    Intent intent = new Intent(root.getContext(), AddPhotoActivity.class);
+                    startActivity(intent);
+                } else {
+                    Toast.makeText(root.getContext(), "스토리지 읽기 권한이 없습니다.", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
         return root;
     }
 }

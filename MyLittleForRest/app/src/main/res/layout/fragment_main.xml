@@ -16,19 +16,32 @@
                 android:id="@+id/region"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="서울시"
+                android:text="서울시 + 습도 + 온도"
                 android:textSize="20sp"/>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+            <ImageButton
+                android:id="@+id/bt_upload"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@android:drawable/ic_menu_add"/>
+
+
         </LinearLayout>
         <LinearLayout
             android:id="@+id/ll_weather"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
             <ImageView
                 android:id="@+id/iv_weather"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="bottom"
-                android:background="@mipmap/ic_launcher"/>
+                android:background="@mipmap/ic_launcher"
+                android:gravity="bottom" />
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -40,7 +53,7 @@
                 android:layout_width="300dp"
                 android:layout_height="50dp"
                 android:gravity="center"
-                android:text="명언"
+                android:text="미션"
                 android:textSize="25sp"
                 android:background="@drawable/btn_signin_google"/>
             <ImageButton
@@ -52,7 +65,9 @@
                 android:id="@+id/plant_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="식물이름"/>
+                android:text="식물이름"
+                android:textSize="25sp"/>
+
 
             <ProgressBar
                 android:id="@+id/exp"

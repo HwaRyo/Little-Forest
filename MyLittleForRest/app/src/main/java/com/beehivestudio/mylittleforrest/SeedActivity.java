@@ -1,31 +1,20 @@
 package com.beehivestudio.mylittleforrest;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.beehivestudio.mylittleforrest.model.SeedDTO;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
-import com.google.firebase.firestore.core.FirestoreClient;
-import com.google.firebase.storage.FirebaseStorage;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -93,11 +82,15 @@ public class SeedActivity extends AppCompatActivity {
         seed5.setOnClickListener(onClickListener);
         seed6.setOnClickListener(onClickListener);
 
-
     }
 
     private void seed_sand(String species, String name) {
+        String pattern = "yyyyMMdd";
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+        String date = simpleDateFormat.format(new Date());
+
         Map<String, Object> user = new HashMap<>();
+        user.put("date", date);
         user.put("species", species);
         user.put("name", name);
         user.put("exp", "0");

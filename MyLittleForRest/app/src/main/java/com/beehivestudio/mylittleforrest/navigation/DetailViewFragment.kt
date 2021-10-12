@@ -145,67 +145,27 @@ class DetailViewFragment : Fragment() {
 
             // 설명 텍스트
             viewHolder.detailviewitem_explain_textview.text = contentDTOs[position].explain
-            // 좋아요 이벤트
-            viewHolder.detailviewitem_favorite_imageview.setOnClickListener { favoriteEvent(position) }
 
-            //좋아요 버튼 설정
-            if (contentDTOs[position].favorites.containsKey(FirebaseAuth.getInstance().currentUser!!.uid)) {
-
-                viewHolder.detailviewitem_favorite_imageview.setImageResource(R.drawable.ic_favorite)
-
-            } else {
-
-                viewHolder.detailviewitem_favorite_imageview.setImageResource(R.drawable.ic_favorite_border)
-            }
-            //좋아요 카운터 설정
-            viewHolder.detailviewitem_favoritecounter_textview.text = "좋아요 " + contentDTOs[position].favoriteCount + "개"
             viewHolder.detailviewitem_comment_imageview.setOnClickListener{v ->
                 var intent = Intent(v.context,CommentActivity::class.java)
                 intent.putExtra("contentUid",contentUidList[position])
                 startActivity(intent)
             }
+
+            viewHolder.detailviewitem_imageview_content.setOnClickListener {
+                val nextIntent = Intent(holder.itemView.context, ContentDetailActivity::class.java)
+                nextIntent.putExtra("imageUrl", contentDTOs[position].imageUrl)
+                nextIntent.putExtra("explain", contentDTOs[position].explain)
+                nextIntent.putExtra("contentUid",contentUidList[position])
+                startActivity(nextIntent)
+            }
         }
 
-        fun favoriteAlarm(destinationUid: String) {
-
-            val alarmDTO = AlarmDTO()
-            alarmDTO.destinationUid = destinationUid
-            alarmDTO.userId = user?.email
-            alarmDTO.uid = user?.uid
-            alarmDTO.kind = 0
-            alarmDTO.timestamp = System.currentTimeMillis()
-
-            FirebaseFirestore.getInstance().collection("alarms").document().set(alarmDTO)
-            var message = user?.email + getString(R.string.alarm_favorite)
-        }
 
         override fun getItemCount(): Int {
 
             return contentDTOs.size
 
-        }
-
-        //좋아요 이벤트 기능
-        private fun favoriteEvent(position: Int) {
-            var tsDoc = firestore?.collection("images")?.document(contentUidList[position])
-            firestore?.runTransaction { transaction ->
-
-                val uid = FirebaseAuth.getInstance().currentUser!!.uid
-                val contentDTO = transaction.get(tsDoc!!).toObject(ContentDTO::class.java)
-
-                if (contentDTO!!.favorites.containsKey(uid)) {
-                    // Unstar the post and remove self from stars
-                    contentDTO?.favoriteCount = contentDTO?.favoriteCount!! - 1
-                    contentDTO?.favorites.remove(uid)
-
-                } else {
-                    // Star the post and add self to stars
-                    contentDTO?.favoriteCount = contentDTO?.favoriteCount!! + 1
-                    contentDTO?.favorites[uid] = true
-                    favoriteAlarm(contentDTOs[position].uid!!)
-                }
-                transaction.set(tsDoc, contentDTO)
-            }
         }
     }
 

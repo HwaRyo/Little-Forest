@@ -1,12 +1,16 @@
 package com.beehivestudio.mylittleforrest
 
 import android.Manifest
+import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Bundle
 
 import android.view.MenuItem
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import com.beehivestudio.mylittleforrest.DetailViewFragment
 import com.beehivestudio.mylittleforrest.GridFragment
 import com.beehivestudio.mylittleforrest.R
@@ -55,6 +59,20 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
                     .commit()
                 return true
             }
+
+//            // 사진업로드 코드
+//            R.id.action_mission -> {
+//                if (ContextCompat.checkSelfPermission(this,
+//                        Manifest.permission.READ_EXTERNAL_STORAGE
+//                    ) == PackageManager.PERMISSION_GRANTED
+//                ) {
+//                    startActivity(Intent(this, AddPhotoActivity::class.java))
+//                } else {
+//                    Toast.makeText(this, "스토리지 읽기 권한이 없습니다.", Toast.LENGTH_LONG).show()
+//                }
+//                return true
+//            }
+
             R.id.action_mission -> {
                 val missionFragment = MissionFragment()
                 supportFragmentManager.beginTransaction()
@@ -62,6 +80,7 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
                     .commit()
                 return true
             }
+
             R.id.action_community -> {
 
                 val detailViewFragment = DetailViewFragment()
@@ -79,19 +98,7 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
                 return true
             }
 
-            //사진업로드 코드
-//            R.id.action_add_photo -> {
-//                if (ContextCompat.checkSelfPermission(
-//                        this,
-//                        Manifest.permission.READ_EXTERNAL_STORAGE
-//                    ) == PackageManager.PERMISSION_GRANTED
-//                ) {
-//                    startActivity(Intent(this, AddPhotoActivity::class.java))
-//                } else {
-//                    Toast.makeText(this, "스토리지 읽기 권한이 없습니다.", Toast.LENGTH_LONG).show()
-//                }
-//                return true
-//            }
+
 
             R.id.action_account -> {
                 val userFragment = UserFragment()

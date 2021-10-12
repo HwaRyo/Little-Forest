@@ -1,87 +1,85 @@
 package com.beehivestudio.mylittleforrest
 
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
-import com.beehivestudio.mylittleforrest.R
-import com.beehivestudio.mylittleforrest.ContentDTO
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ListenerRegistration
-import kotlinx.android.synthetic.main.activity_comment.*
+import kotlinx.android.synthetic.main.activity_content_detail.*
 import kotlinx.android.synthetic.main.item_comment.view.*
+import kotlinx.android.synthetic.main.item_detail.view.*
 
-class CommentActivity : AppCompatActivity() {
 
-    var contentUid: String? = null
+class ContentDetailActivity : AppCompatActivity() {
+
+
     var user: FirebaseUser? = null
-    var destinationUid: String? = null
-    var commentSnapshot: ListenerRegistration? = null
+    var content_commentSnapshot: ListenerRegistration? = null
+    var firestore: FirebaseFirestore? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_comment)
+        setContentView(R.layout.activity_content_detail)
 
         user = FirebaseAuth.getInstance().currentUser
-        destinationUid = intent.getStringExtra("destinationUid")
-        contentUid = intent.getStringExtra("contentUid")
 
-        comment_recyclerview.adapter = CommentRecyclerViewAdapter()
-        comment_recyclerview.layoutManager = LinearLayoutManager(this)
+        content_detailviewitem_explain_textview.setText(intent.getStringExtra("explain"))
+        Glide.with(this)
+            .load(Uri.parse(intent.getStringExtra("imageUrl")))
+            .into(content_detailviewitem_imageview_content)
 
-        comment_btn_send.setOnClickListener {
+        content_comment_recyclerview.adapter = content_CommentRecyclerViewAdapter()
+        content_comment_recyclerview.layoutManager = LinearLayoutManager(this)
+
+        content_comment_btn_send.setOnClickListener {
             val comment = ContentDTO.Comment()
 
             comment.userId = FirebaseAuth.getInstance().currentUser!!.email
-            comment.comment = comment_edit_message.text.toString()
+            comment.comment = content_comment_edit_message.text.toString()
             comment.uid = FirebaseAuth.getInstance().currentUser!!.uid
             comment.timestamp = System.currentTimeMillis()
 
             FirebaseFirestore.getInstance()
                 .collection("images")
-                .document(contentUid!!)
+                .document(intent.getStringExtra("contentUid")!!)
                 .collection("comments")
                 .document()
                 .set(comment)
 
         }
 
-
-
     }
 
     override fun onStop() {
         super.onStop()
-        commentSnapshot?.remove()
+        content_commentSnapshot?.remove()
     }
 
 
-
-
-    inner class CommentRecyclerViewAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-        val comments: ArrayList<ContentDTO.Comment>
+    inner class content_CommentRecyclerViewAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+        val content_comments: ArrayList<ContentDTO.Comment>
 
         init {
-            comments = ArrayList()
-            commentSnapshot = FirebaseFirestore
+            content_comments = ArrayList()
+            content_commentSnapshot = FirebaseFirestore
                 .getInstance()
                 .collection("images")
-                .document(contentUid!!)
+                .document(intent.getStringExtra("contentUid")!!)
                 .collection("comments")
                 .addSnapshotListener { querySnapshot, firebaseFirestoreException ->
-                    comments.clear()
+                    content_comments.clear()
                     if (querySnapshot == null) return@addSnapshotListener
                     for (snapshot in querySnapshot?.documents!!) {
-                        comments.add(snapshot.toObject(ContentDTO.Comment::class.java)!!)
+                        content_comments.add(snapshot.toObject(ContentDTO.Comment::class.java)!!)
                     }
                     notifyDataSetChanged()
 
@@ -102,7 +100,7 @@ class CommentActivity : AppCompatActivity() {
             // Profile Image
             FirebaseFirestore.getInstance()
                 .collection("profileImages")
-                .document(comments[position].uid!!)
+                .document(content_comments[position].uid!!)
                 .addSnapshotListener { documentSnapshot, firebaseFirestoreException ->
                     if (documentSnapshot?.data != null) {
 
@@ -113,13 +111,13 @@ class CommentActivity : AppCompatActivity() {
                     }
                 }
 
-            view.commentviewitem_textview_profile.text = comments[position].userId
-            view.commentviewitem_textview_comment.text = comments[position].comment
+            view.commentviewitem_textview_profile.text = content_comments[position].userId
+            view.commentviewitem_textview_comment.text = content_comments[position].comment
         }
 
         override fun getItemCount(): Int {
 
-            return comments.size
+            return content_comments.size
         }
 
         private inner class CustomViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)

@@ -99,6 +99,32 @@
             </LinearLayout>
         </LinearLayout>
     </RelativeLayout>
+
+    <RadioGroup
+        android:id="@+id/user_radio_group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center">
+
+        <RadioButton
+            android:id="@+id/user_rb_public"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Public"
+            android:checked="true"/>
+
+        <TextView
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"/>
+
+        <RadioButton
+            android:id="@+id/user_rb_private"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Private"/>
+
+    </RadioGroup>
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/account_recyclerview"
         android:layout_width="match_parent"
