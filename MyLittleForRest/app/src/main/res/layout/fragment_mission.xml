@@ -11,22 +11,25 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:gravity="bottom"
+        android:layout_weight="25"
         android:orientation="vertical">
 
         <TextView
             android:id="@+id/mission_title"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_marginLeft="5dp"
             android:text="오늘의 미션"
+            android:layout_weight="3"
             android:textColor="@color/white"
             android:textSize="30dp" />
 
         <TextView
             android:id="@+id/mission_subTitle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
             android:layout_marginLeft="5dp"
+            android:layout_weight="2"
             android:text="미션 수행하고 예쁜 꽃도 피워요!"
             android:textColor="@color/white"
             android:textSize="15dp" />
@@ -39,9 +42,8 @@
                 android:id="@+id/mission_totList"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="20"
-                android:orientation="vertical"
-                android:gravity="center">
+                android:gravity="center"
+                android:orientation="vertical">
 
                 <LinearLayout
                     android:id="@+id/mission_1_layout"
@@ -49,82 +51,86 @@
                     android:layout_height="match_parent"
                     android:layout_alignParentTop="true"
                     android:gravity="center"
+                    android:layout_weight="20"
                     android:orientation="vertical">
 
                     <LinearLayout
                         android:id="@+id/mission_1_form"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
                         android:layout_alignParentTop="true"
                         android:layout_marginStart="20dp"
                         android:layout_marginTop="10dp"
                         android:layout_marginEnd="20dp"
-                        android:layout_marginBottom="10dp"
-                        android:layout_weight="10"
+                        android:layout_marginBottom="5dp"
                         android:background="@drawable/mission"
-                        android:gravity="center"
+                        android:layout_weight="10"
+                        android:gravity="bottom"
                         android:orientation="horizontal">
 
                         <LinearLayout
                             android:id="@+id/mission_11_layout"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
                             android:layout_alignParentTop="true"
                             android:layout_marginLeft="7dp"
                             android:layout_marginRight="10dp"
-                            android:layout_weight = "5"
-                            android:gravity="bottom"
+                            android:layout_weight="5"
+                            android:gravity="center"
                             android:orientation="vertical">
 
                             <ImageView
                                 android:id="@+id/mission_11_image"
-                                android:layout_width="170dp"
-                                android:layout_height="230dp"
-                                android:layout_alignParentLeft="true"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:adjustViewBounds="true"
                                 android:contentDescription="@string/profile"
                                 android:scaleType="fitCenter"
-                                android:layout_weight = "1"
-                                tools:src="@drawable/ic_account" />
+                                android:layout_weight="1"
+                                android:src="@drawable/ic_account" />
 
                             <TextView
                                 android:id="@+id/mission_11_text"
                                 android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:checked="true"
+                                android:layout_height="wrap_content"
+                                android:adjustViewBounds="true"
+                                android:layout_weight="4"
                                 android:gravity="center"
-                                android:layout_weight = "4"
-                                android:text="cb1" />
+                                android:text="cb1"
+                                android:textSize="15sp" />
                         </LinearLayout>
 
                         <LinearLayout
                             android:id="@+id/mission_12_layout"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
                             android:layout_alignParentTop="true"
                             android:layout_marginLeft="10dp"
                             android:layout_marginRight="7dp"
                             android:layout_weight="5"
-                            android:gravity="bottom"
+                            android:gravity="center"
                             android:orientation="vertical">
 
                             <ImageView
                                 android:id="@+id/mission_12_image"
-                                android:layout_width="170dp"
-                                android:layout_height="230dp"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
                                 android:layout_alignParentLeft="true"
-                                android:scaleType="fitCenter"
+                                android:adjustViewBounds="true"
                                 android:contentDescription="@string/profile"
-                                android:layout_weight = "1"
-                                tools:src="@drawable/ic_account" />
+                                android:scaleType="fitCenter"
+                                android:layout_weight="1"
+                                android:src="@drawable/ic_account" />
 
                             <TextView
                                 android:id="@+id/mission_12_text"
                                 android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:checked="true"
+                                android:layout_height="wrap_content"
+                                android:adjustViewBounds="true"
+                                android:layout_weight="4"
                                 android:gravity="center"
-                                android:layout_weight = "4"
-                                android:text="cb1" />
+                                android:text="cb1"
+                                android:textSize="15sp" />
                         </LinearLayout>
                     </LinearLayout>
 
@@ -147,8 +153,8 @@
                         android:layout_marginTop="10dp"
                         android:layout_marginEnd="20dp"
                         android:layout_marginBottom="5dp"
-                        android:layout_weight="10"
                         android:background="@drawable/mission"
+                        android:layout_weight="10"
                         android:gravity="center"
                         android:orientation="horizontal">
 
@@ -160,26 +166,27 @@
                             android:layout_marginLeft="7dp"
                             android:layout_marginRight="10dp"
                             android:layout_weight="5"
-                            android:gravity="bottom"
+                            android:gravity="center"
                             android:orientation="vertical">
 
                             <ImageView
                                 android:id="@+id/mission_21_image"
                                 android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:layout_weight="1"
+                                android:layout_height="wrap_content"
                                 android:adjustViewBounds="true"
                                 android:contentDescription="@string/profile"
                                 android:scaleType="fitCenter"
-                                tools:src="@android:drawable/stat_sys_vp_phone_call_on_hold" />
+                                android:layout_weight="1"
+                                android:src="@drawable/ic_account" />
 
                             <TextView
                                 android:id="@+id/mission_21_text"
                                 android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:layout_weight="4"
+                                android:layout_height="wrap_content"
+                                android:adjustViewBounds="true"
                                 android:gravity="center"
-                                android:text="물 한 잔 마시기"
+                                android:text="cb1"
+                                android:layout_weight="4"
                                 android:textSize="15sp" />
                         </LinearLayout>
 
@@ -191,45 +198,45 @@
                             android:layout_marginLeft="10dp"
                             android:layout_marginRight="7dp"
                             android:layout_weight="5"
-                            android:gravity="bottom"
+                            android:gravity="center"
                             android:orientation="vertical">
 
                             <ImageView
                                 android:id="@+id/mission_22_image"
                                 android:layout_width="match_parent"
-                                android:layout_height="match_parent"
+                                android:layout_height="wrap_content"
                                 android:layout_alignParentLeft="true"
+                                android:adjustViewBounds="true"
                                 android:contentDescription="@string/profile"
                                 android:scaleType="fitCenter"
-                                android:layout_weight = "1"
-                                tools:src="@drawable/ic_account" />
+                                android:layout_weight="1"
+                                android:src="@drawable/ic_account" />
 
                             <TextView
                                 android:id="@+id/mission_22_text"
                                 android:layout_width="match_parent"
-                                android:layout_height="match_parent"
+                                android:layout_height="wrap_content"
+                                android:adjustViewBounds="true"
+                                android:layout_weight="4"
                                 android:gravity="center"
-                                android:layout_weight = "4"
                                 android:text="cb1" />
                         </LinearLayout>
                     </LinearLayout>
-
-
                 </LinearLayout>
-                <Button
-                    android:id="@+id/add_btn"
-                    android:layout_width="200dp"
-                    android:layout_height="40dp"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginEnd="20dp"
-                    android:layout_marginBottom="5dp"
-                    android:background="@drawable/mission"
-                    android:text="광고를 보고 미션을 리셋해주세요!"
-                    android:textColor="@color/black" />
             </LinearLayout>
-
-
-
         </ScrollView>
+
+        <Button
+            android:id="@+id/add_btn"
+            android:layout_width="200dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="5dp"
+            android:background="@drawable/mission"
+            android:text="광고를 보고 미션을 리셋해주세요!"
+            android:textColor="@color/black"
+            android:layout_gravity="center"/>
+
     </LinearLayout>
 </RelativeLayout>
