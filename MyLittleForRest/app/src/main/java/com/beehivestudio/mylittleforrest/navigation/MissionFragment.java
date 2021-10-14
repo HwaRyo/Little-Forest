@@ -1,66 +1,133 @@
 package com.beehivestudio.mylittleforrest.navigation;
 
+import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import com.beehivestudio.mylittleforrest.MainActivity;
 import com.beehivestudio.mylittleforrest.R;
+import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link MissionFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+
+
 public class MissionFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
+    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+    String uid = user.getUid();
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public MissionFragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment MissionFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static MissionFragment newInstance(String param1, String param2) {
-        MissionFragment fragment = new MissionFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
+    String pattern = "yyyyMMdd";
+    SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+    String date = simpleDateFormat.format(new Date());
+    int current_date = Integer.parseInt(date);
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_mission, container, false);
+        View root = inflater.inflate(R.layout.fragment_mission, container, false);
+
+
+        ImageView mission_11_image = root.findViewById(R.id.mission_11_image);
+        ImageView mission_12_image = root.findViewById(R.id.mission_12_image);
+        ImageView mission_21_image = root.findViewById(R.id.mission_21_image);
+        ImageView mission_22_image = root.findViewById(R.id.mission_22_image);
+        TextView mission_11_text = root.findViewById(R.id.mission_11_text);
+        TextView mission_12_text = root.findViewById(R.id.mission_12_text);
+        TextView mission_21_text = root.findViewById(R.id.mission_21_text);
+        TextView mission_22_text = root.findViewById(R.id.mission_22_text);
+
+
+        for(int i : new int[]{1, 2, 3, 4}) {
+            db.collection("Mission").document(String.valueOf(i)).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                    if (task.isSuccessful()) {
+                        DocumentSnapshot document = task.getResult();
+                        switch (i){
+                            case 1:
+//                                Glide.with(root.getContext())
+//                                        .load(url)
+//                                        .into(mission_11_image);
+                                mission_11_text.setText(document.getString("content"));
+                                break;
+                            case 2:
+//                                Glide.with(root.getContext())
+//                                        .load(url)
+//                                        .into(mission_12_image);
+                                mission_12_text.setText(document.getString("content"));
+                                break;
+                            case 3:
+//                                Glide.with(root.getContext())
+//                                        .load(url)
+//                                        .into(mission_21_image);
+                                mission_21_text.setText(document.getString("content"));
+                                break;
+                            case 4:
+//                                Glide.with(root.getContext())
+//                                        .load(url)
+//                                        .into(mission_22_image);
+                                mission_22_text.setText(document.getString("content"));
+                                break;
+                        }
+
+                    }
+                }
+            });
+        }
+
+        ImageButton.OnClickListener onClickListener = new ImageButton.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Map<String, Object> user = new HashMap<>();
+                final int[] current_exp = new int[1];
+                final String[] current = new String[3];
+                db.collection("Seed").document(uid).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        if (task.isSuccessful()) {
+                            DocumentSnapshot document = task.getResult();
+                            user.put("date", date);
+                            current_exp[0] = Integer.parseInt(document.getString("exp"));
+                            user.put("exp", String.valueOf(current_exp[0]+1));
+                            user.put("name", document.getString("name"));
+                            user.put("species", document.getString("species"));
+
+                            db.collection("Seed").document(uid).set(user);
+                        }
+                    }
+                });
+            }
+        };
+
+        mission_11_image.setOnClickListener(onClickListener);
+        mission_12_image.setOnClickListener(onClickListener);
+        mission_21_image.setOnClickListener(onClickListener);
+        mission_22_image.setOnClickListener(onClickListener);
+
+        return root;
     }
 }
+
+
