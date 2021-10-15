@@ -51,7 +51,7 @@ public class MissionFragment extends Fragment {
     SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
     String date = simpleDateFormat.format(new Date());
     int current_date = Integer.parseInt(date);
-    int mission[] = new int[4];
+    int mission[] = new int[6];
 
 
 
@@ -64,10 +64,15 @@ public class MissionFragment extends Fragment {
         ImageView mission_12_image = root.findViewById(R.id.mission_12_image);
         ImageView mission_21_image = root.findViewById(R.id.mission_21_image);
         ImageView mission_22_image = root.findViewById(R.id.mission_22_image);
+        ImageView mission_31_image = root.findViewById(R.id.mission_31_image);
+        ImageView mission_32_image = root.findViewById(R.id.mission_32_image);
+
         CheckBox mission_11_text = root.findViewById(R.id.mission_11_text);
         CheckBox mission_12_text = root.findViewById(R.id.mission_12_text);
         CheckBox mission_21_text = root.findViewById(R.id.mission_21_text);
         CheckBox mission_22_text = root.findViewById(R.id.mission_22_text);
+        CheckBox mission_31_text = root.findViewById(R.id.mission_31_text);
+        CheckBox mission_32_text = root.findViewById(R.id.mission_32_text);
 
 
         db.collection("MissionCheck").document(uid).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -79,8 +84,8 @@ public class MissionFragment extends Fragment {
 
                         Random rand = new Random();
 
-                        for (int i = 0; i < 4; i++) {
-                            mission[i] = rand.nextInt(10) + 1;
+                        for (int i = 0; i < 6; i++) {
+                            mission[i] = rand.nextInt(50) + 1;
                             for (int j = 0; i < j; j++) {
                                 if (mission[i] == mission[j]) {
                                     i--;
@@ -94,6 +99,8 @@ public class MissionFragment extends Fragment {
                         missioncheck.put("mission2", String.valueOf(mission[1]));
                         missioncheck.put("mission3", String.valueOf(mission[2]));
                         missioncheck.put("mission4", String.valueOf(mission[3]));
+                        missioncheck.put("mission5", String.valueOf(mission[4]));
+                        missioncheck.put("mission6", String.valueOf(mission[5]));
 
                         db.collection("MissionCheck").document(uid).set(missioncheck);
 
@@ -102,10 +109,12 @@ public class MissionFragment extends Fragment {
                         mission[1] = Integer.parseInt(document.getString("mission2").toString());
                         mission[2] = Integer.parseInt(document.getString("mission3").toString());
                         mission[3] = Integer.parseInt(document.getString("mission4").toString());
+                        mission[4] = Integer.parseInt(document.getString("mission5").toString());
+                        mission[5] = Integer.parseInt(document.getString("mission6").toString());
                     }
                 }
 
-                for (int i = 0; i < 4; i++) {
+                for (int i = 0; i < 6; i++) {
                     int count = i;
                     db.collection("Mission").document(String.valueOf(mission[i])).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                         @Override
@@ -137,6 +146,18 @@ public class MissionFragment extends Fragment {
 //                                        .into(mission_22_image);
                                         mission_22_text.setText(document.getString("content"));
                                         break;
+                                    case 4:
+//                                Glide.with(root.getContext())
+//                                        .load(url)
+//                                        .into(mission_21_image);
+                                        mission_31_text.setText(document.getString("content"));
+                                        break;
+                                    case 5:
+//                                Glide.with(root.getContext())
+//                                        .load(url)
+//                                        .into(mission_22_image);
+                                        mission_32_text.setText(document.getString("content"));
+                                        break;
                                 }
                             }
                         }
@@ -158,6 +179,8 @@ public class MissionFragment extends Fragment {
                         missionclear.put("mission2", false);
                         missionclear.put("mission3", false);
                         missionclear.put("mission4", false);
+                        missionclear.put("mission5", false);
+                        missionclear.put("mission6", false);
 
                         db.collection("MissionClear").document(uid).set(missionclear);
                     } else {
@@ -165,6 +188,8 @@ public class MissionFragment extends Fragment {
                         mission_12_text.setChecked(document.getBoolean("mission2"));
                         mission_21_text.setChecked(document.getBoolean("mission3"));
                         mission_22_text.setChecked(document.getBoolean("mission4"));
+                        mission_31_text.setChecked(document.getBoolean("mission5"));
+                        mission_32_text.setChecked(document.getBoolean("mission6"));
                     }
                 }
 
@@ -202,6 +227,8 @@ public class MissionFragment extends Fragment {
                     check.put("mission2", mission_12_text.isChecked());
                     check.put("mission3", mission_21_text.isChecked());
                     check.put("mission4", mission_22_text.isChecked());
+                    check.put("mission5", mission_31_text.isChecked());
+                    check.put("mission6", mission_32_text.isChecked());
 
                     db.collection("MissionClear").document(uid).set(check);
                 }else{
@@ -240,6 +267,8 @@ public class MissionFragment extends Fragment {
                     check.put("mission2", mission_12_text.isChecked());
                     check.put("mission3", mission_21_text.isChecked());
                     check.put("mission4", mission_22_text.isChecked());
+                    check.put("mission5", mission_31_text.isChecked());
+                    check.put("mission6", mission_32_text.isChecked());
 
                     db.collection("MissionClear").document(uid).set(check);
                 }else{
@@ -278,6 +307,8 @@ public class MissionFragment extends Fragment {
                     check.put("mission2", mission_12_text.isChecked());
                     check.put("mission3", mission_21_text.isChecked());
                     check.put("mission4", mission_22_text.isChecked());
+                    check.put("mission5", mission_31_text.isChecked());
+                    check.put("mission6", mission_32_text.isChecked());
 
                     db.collection("MissionClear").document(uid).set(check);
                 }else{
@@ -316,6 +347,8 @@ public class MissionFragment extends Fragment {
                     check.put("mission2", mission_12_text.isChecked());
                     check.put("mission3", mission_21_text.isChecked());
                     check.put("mission4", mission_22_text.isChecked());
+                    check.put("mission5", mission_31_text.isChecked());
+                    check.put("mission6", mission_32_text.isChecked());
 
                     db.collection("MissionClear").document(uid).set(check);
                 }else{
@@ -324,7 +357,87 @@ public class MissionFragment extends Fragment {
             }
         });
 
-        for (CheckBox checkBox : Arrays.asList(mission_11_text, mission_12_text, mission_21_text, mission_22_text)) {
+        mission_31_image.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!mission_31_text.isChecked()) {
+                    mission_31_text.setChecked(true);
+                    Map<String, Object> user = new HashMap<>();
+                    Map<String, Object> check = new HashMap<>();
+                    final int[] current_exp = new int[1];
+
+                    db.collection("Seed").document(uid).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                            if (task.isSuccessful()) {
+                                DocumentSnapshot document = task.getResult();
+                                user.put("date", date);
+                                current_exp[0] = Integer.parseInt(document.getString("exp"));
+                                user.put("exp", String.valueOf(current_exp[0] + 1));
+                                user.put("name", document.getString("name"));
+                                user.put("species", document.getString("species"));
+
+                                db.collection("Seed").document(uid).set(user);
+                            }
+                        }
+                    });
+
+                    check.put("date", date);
+                    check.put("mission1", mission_11_text.isChecked());
+                    check.put("mission2", mission_12_text.isChecked());
+                    check.put("mission3", mission_21_text.isChecked());
+                    check.put("mission4", mission_22_text.isChecked());
+                    check.put("mission5", mission_31_text.isChecked());
+                    check.put("mission6", mission_32_text.isChecked());
+
+                    db.collection("MissionClear").document(uid).set(check);
+                }else{
+                    mission_31_text.setChecked(true);
+                }
+            }
+        });
+
+        mission_32_image.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!mission_32_text.isChecked()) {
+                    mission_32_text.setChecked(true);
+                    Map<String, Object> user = new HashMap<>();
+                    Map<String, Object> check = new HashMap<>();
+                    final int[] current_exp = new int[1];
+
+                    db.collection("Seed").document(uid).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                            if (task.isSuccessful()) {
+                                DocumentSnapshot document = task.getResult();
+                                user.put("date", date);
+                                current_exp[0] = Integer.parseInt(document.getString("exp"));
+                                user.put("exp", String.valueOf(current_exp[0] + 1));
+                                user.put("name", document.getString("name"));
+                                user.put("species", document.getString("species"));
+
+                                db.collection("Seed").document(uid).set(user);
+                            }
+                        }
+                    });
+
+                    check.put("date", date);
+                    check.put("mission1", mission_11_text.isChecked());
+                    check.put("mission2", mission_12_text.isChecked());
+                    check.put("mission3", mission_21_text.isChecked());
+                    check.put("mission4", mission_22_text.isChecked());
+                    check.put("mission5", mission_31_text.isChecked());
+                    check.put("mission6", mission_32_text.isChecked());
+
+                    db.collection("MissionClear").document(uid).set(check);
+                }else{
+                    mission_32_text.setChecked(true);
+                }
+            }
+        });
+
+        for (CheckBox checkBox : Arrays.asList(mission_11_text, mission_12_text, mission_21_text, mission_22_text, mission_31_text, mission_32_text)) {
             checkBox.setOnTouchListener(new View.OnTouchListener() {
                 @Override
                 public boolean onTouch(View v, MotionEvent event) {
