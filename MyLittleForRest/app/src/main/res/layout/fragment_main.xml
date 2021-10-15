@@ -53,7 +53,7 @@
                 android:layout_width="300dp"
                 android:layout_height="50dp"
                 android:gravity="center"
-                android:text="미션"
+                android:text="명언"
                 android:textSize="25sp"
                 android:background="@drawable/btn_signin_google"/>
             <ImageButton

@@ -89,7 +89,7 @@
                                 android:layout_weight="1"
                                 android:src="@drawable/ic_account" />
 
-                            <TextView
+                            <CheckBox
                                 android:id="@+id/mission_11_text"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
@@ -122,7 +122,7 @@
                                 android:layout_weight="1"
                                 android:src="@drawable/ic_account" />
 
-                            <TextView
+                            <CheckBox
                                 android:id="@+id/mission_12_text"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
@@ -179,7 +179,7 @@
                                 android:layout_weight="1"
                                 android:src="@drawable/ic_account" />
 
-                            <TextView
+                            <CheckBox
                                 android:id="@+id/mission_21_text"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
@@ -212,7 +212,7 @@
                                 android:layout_weight="1"
                                 android:src="@drawable/ic_account" />
 
-                            <TextView
+                            <CheckBox
                                 android:id="@+id/mission_22_text"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"

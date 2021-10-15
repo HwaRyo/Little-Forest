@@ -69,5 +69,4 @@ class EmailLoginActivity : AppCompatActivity() {
             finish()
         }
     }
-
 }
