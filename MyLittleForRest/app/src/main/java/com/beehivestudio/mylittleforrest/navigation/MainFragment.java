@@ -12,6 +12,8 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -20,10 +22,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.beehivestudio.mylittleforrest.AddPhotoActivity;
-import com.beehivestudio.mylittleforrest.LodingActivity;
-import com.beehivestudio.mylittleforrest.MainActivity;
 import com.beehivestudio.mylittleforrest.R;
-import com.beehivestudio.mylittleforrest.SeedActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -31,8 +30,14 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Random;
+
+import retrofit2.Call;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 
 public class MainFragment extends Fragment {
@@ -47,19 +52,51 @@ public class MainFragment extends Fragment {
     String date = simpleDateFormat.format(new Date());
     int current_date = Integer.parseInt(date);
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_main, container, false);
 
         TextView region = root.findViewById(R.id.region);
-        LinearLayout ll_weather = root.findViewById(R.id.ll_weather);
         ImageView iv_weather = root.findViewById(R.id.iv_weather);
         TextView famous_saying = root.findViewById(R.id.famous_saying);
         ImageButton ib_plant = root.findViewById(R.id.ib_plant);
         TextView plant_name = root.findViewById(R.id.plant_name);
         ProgressBar exp = root.findViewById(R.id.exp);
         ImageButton upload = root.findViewById(R.id.bt_upload);
+
+        ImageView cloud1 = root.findViewById(R.id.cloud1);
+        ImageView cloud2 = root.findViewById(R.id.cloud2);
+        ImageView cloud3 = root.findViewById(R.id.cloud3);
+
+        Animation animation1 = AnimationUtils.loadAnimation(root.getContext(), R.anim.translate1);
+        Animation animation2 = AnimationUtils.loadAnimation(root.getContext(), R.anim.translate2);
+        Animation animation3 = AnimationUtils.loadAnimation(root.getContext(), R.anim.translate3);
+        Animation animation4 = AnimationUtils.loadAnimation(root.getContext(), R.anim.translate4);
+        cloud1.startAnimation(animation1);
+        cloud2.startAnimation(animation2);
+        cloud3.startAnimation(animation3);
+        iv_weather.startAnimation(animation4);
+
+
+        Animation animation5 = AnimationUtils.loadAnimation(root.getContext(), R.anim.translate4);
+        cloud1.startAnimation(animation1);
+
+        Random rand = new Random();
+        int saying_num = rand.nextInt(10) + 1;
+
+
+        db.collection("saying").document(String.valueOf(saying_num)).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    famous_saying.setText(document.getString("content"));
+                }
+            }
+        });
+
 
         db.collection("Seed").document(uid).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
@@ -104,4 +141,6 @@ public class MainFragment extends Fragment {
         });
         return root;
     }
+
+
 }

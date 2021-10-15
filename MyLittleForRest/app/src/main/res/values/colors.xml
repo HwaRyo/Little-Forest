@@ -15,7 +15,9 @@
     <color name="colorAccent">#FF4081</color>
     <color name="colorWhite">#FFFFFF</color>
     <color name="colorDivision">#e0e0e0</color>
-    <color name="colorNavIcon">#1d1d1d</color>
+
+
+    <color name="colorNavIcon">#009688</color>
 
     <color name="com_facebook_blue">#293CA6</color>
 

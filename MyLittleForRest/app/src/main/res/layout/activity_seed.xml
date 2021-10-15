@@ -30,7 +30,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="563dp"
         android:gravity="center">
 
         <GridLayout
@@ -45,7 +45,7 @@
             <ImageButton
                 android:id="@+id/seed1"
                 android:layout_width="100dp"
-                android:layout_height="100dp"/>
+                android:layout_height="100dp" />
 
             <ImageButton
                 android:id="@+id/seed2"

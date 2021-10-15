@@ -3,81 +3,106 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background"
     tools:context="com.beehivestudio.mylittleforrest.navigation.MainFragment">
 
-    <LinearLayout
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <TextView
-                android:id="@+id/region"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="서울시 + 습도 + 온도"
-                android:textSize="20sp"/>
+        android:layout_height="match_parent">
+        <ImageView
+            android:id="@+id/iv_weather"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:background="@drawable/sun"
+            android:gravity="bottom" />
 
-            <View
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_weight="1" />
-            <ImageButton
-                android:id="@+id/bt_upload"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@android:drawable/ic_menu_add"/>
+        <ImageView
+            android:id="@+id/cloud1"
+            android:layout_width="200dp"
+            android:layout_height="100dp"
+            android:src="@drawable/cloud"/>
 
+        <ImageView
+            android:id="@+id/cloud2"
+            android:layout_width="200dp"
+            android:layout_height="100dp"
+            android:layout_margin="100dp"
+            android:src="@drawable/cloud"/>
 
-        </LinearLayout>
-        <LinearLayout
-            android:id="@+id/ll_weather"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/cloud3"
+            android:layout_width="200dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center"
+            android:src="@drawable/cloud"/>
 
-            <ImageView
-                android:id="@+id/iv_weather"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@mipmap/ic_launcher"
-                android:gravity="bottom" />
-        </LinearLayout>
+        <ImageButton
+            android:id="@+id/bt_upload"
+            android:background="@android:color/transparent"
+            android:layout_gravity="right"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:adjustViewBounds="true"
+            android:scaleType="fitCenter"
+            android:src="@android:drawable/ic_menu_add" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:gravity="center">
-            <TextView
-                android:id="@+id/famous_saying"
-                android:layout_width="300dp"
-                android:layout_height="50dp"
-                android:gravity="center"
-                android:text="미션"
-                android:textSize="25sp"
-                android:background="@drawable/btn_signin_google"/>
-            <ImageButton
-                android:id="@+id/ib_plant"
-                android:layout_width="300dp"
-                android:layout_height="300dp"
-                android:background="@drawable/ic_account"/>
-            <TextView
-                android:id="@+id/plant_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="식물이름"
-                android:textSize="25sp"/>
+            android:orientation="vertical">
 
-
-            <ProgressBar
-                android:id="@+id/exp"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:max="100"
-                style="@android:style/Widget.ProgressBar.Horizontal"/>
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/region"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="서울시 + 습도 + 온도"
+                    android:textSize="20sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/famous_saying"
+                    android:layout_width="300dp"
+                    android:layout_height="80dp"
+                    android:background="@drawable/speech_bubble"
+                    android:gravity="center"
+                    android:adjustViewBounds="true"
+                    android:scaleType="fitXY"
+                    android:padding="10dp"
+                    android:textSize="15sp" />
+
+                <ImageButton
+                    android:id="@+id/ib_plant"
+                    android:layout_width="match_parent"
+                    android:layout_height="300dp"
+                    android:background="@drawable/flower" />
+
+                <TextView
+                    android:id="@+id/plant_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="25sp" />
+
+
+                <ProgressBar
+                    android:id="@+id/exp"
+                    style="@android:style/Widget.ProgressBar.Horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:max="100" />
+            </LinearLayout>
+
+
         </LinearLayout>
-
-
-    </LinearLayout>
-
+    </FrameLayout>
 </FrameLayout>
