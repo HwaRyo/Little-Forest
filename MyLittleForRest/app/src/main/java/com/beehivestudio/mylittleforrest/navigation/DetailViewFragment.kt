@@ -20,6 +20,7 @@ import com.squareup.okhttp.OkHttpClient
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.item_detail.view.*
 import kotlinx.android.synthetic.main.fragment_detail.view.*
+import kotlinx.android.synthetic.main.fragment_user.*
 
 import java.util.*
 

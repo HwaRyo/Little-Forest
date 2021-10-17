@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background"
+    android:background="@drawable/sunbackground"
     tools:context="com.beehivestudio.mylittleforrest.navigation.MainFragment">
 
     <FrameLayout
@@ -36,6 +36,12 @@
             android:layout_gravity="center"
             android:src="@drawable/cloud"/>
 
+        <TextView
+            android:id="@+id/region"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="10sp" />
+
         <ImageButton
             android:id="@+id/bt_upload"
             android:background="@android:color/transparent"
@@ -45,24 +51,6 @@
             android:adjustViewBounds="true"
             android:scaleType="fitCenter"
             android:src="@android:drawable/ic_menu_add" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <TextView
-                    android:id="@+id/region"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="서울시 + 습도 + 온도"
-                    android:textSize="20sp" />
-
-            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -81,11 +69,12 @@
                     android:padding="10dp"
                     android:textSize="15sp" />
 
-                <ImageButton
-                    android:id="@+id/ib_plant"
+                <ImageView
+                    android:id="@+id/iv_plant"
                     android:layout_width="match_parent"
                     android:layout_height="300dp"
-                    android:background="@drawable/flower" />
+                    android:adjustViewBounds="true"
+                    android:scaleType="fitCenter"/>
 
                 <TextView
                     android:id="@+id/plant_name"
@@ -101,8 +90,5 @@
                     android:layout_height="wrap_content"
                     android:max="100" />
             </LinearLayout>
-
-
-        </LinearLayout>
     </FrameLayout>
 </FrameLayout>

@@ -1,31 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/black">
 
-    <FrameLayout
+
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-
-        <ImageView
-            android:id="@+id/test"
+        <LinearLayout
+            android:id="@+id/mission_totList"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:src="@drawable/cloud"/>
-
-
-
-
-        <LinearLayout
-            android:id="@+id/mission_main"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_weight="25"
-            android:gravity="bottom"
+            android:gravity="center"
             android:orientation="vertical">
 
             <TextView
@@ -48,210 +37,273 @@
                 android:textColor="@color/white"
                 android:textSize="15dp" />
 
-            <ScrollView
+            <LinearLayout
+                android:id="@+id/mission_1_layout"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:layout_alignParentTop="true"
+                android:layout_weight="20"
+                android:gravity="center"
+                android:orientation="vertical">
 
                 <LinearLayout
-                    android:id="@+id/mission_totList"
+                    android:id="@+id/mission_1_form"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:orientation="vertical">
+                    android:layout_alignParentTop="true"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_weight="10"
+                    android:background="@drawable/mission"
+                    android:gravity="bottom"
+                    android:orientation="horizontal">
 
                     <LinearLayout
-                        android:id="@+id/mission_1_layout"
+                        android:id="@+id/mission_11_layout"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_alignParentTop="true"
-                        android:layout_weight="20"
+                        android:layout_marginLeft="7dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_weight="5"
                         android:gravity="center"
                         android:orientation="vertical">
 
-                        <LinearLayout
-                            android:id="@+id/mission_1_form"
+                        <ImageView
+                            android:id="@+id/mission_11_image"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_alignParentTop="true"
-                            android:layout_marginStart="20dp"
-                            android:layout_marginTop="10dp"
-                            android:layout_marginEnd="20dp"
-                            android:layout_marginBottom="5dp"
-                            android:layout_weight="10"
-                            android:background="@drawable/mission"
-                            android:gravity="bottom"
-                            android:orientation="horizontal">
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:adjustViewBounds="true"
+                            android:contentDescription="@string/profile"
+                            android:scaleType="fitCenter"
+                            android:src="@drawable/ic_account" />
 
-                            <LinearLayout
-                                android:id="@+id/mission_11_layout"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:layout_alignParentTop="true"
-                                android:layout_marginLeft="7dp"
-                                android:layout_marginRight="10dp"
-                                android:layout_weight="5"
-                                android:gravity="center"
-                                android:orientation="vertical">
-
-                                <ImageView
-                                    android:id="@+id/mission_11_image"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_weight="1"
-                                    android:adjustViewBounds="true"
-                                    android:contentDescription="@string/profile"
-                                    android:scaleType="fitCenter"
-                                    android:src="@drawable/ic_account" />
-
-                                <CheckBox
-                                    android:id="@+id/mission_11_text"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_weight="4"
-                                    android:adjustViewBounds="true"
-                                    android:gravity="center"
-                                    android:text="cb1"
-                                    android:textSize="15sp" />
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:id="@+id/mission_12_layout"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:layout_alignParentTop="true"
-                                android:layout_marginLeft="10dp"
-                                android:layout_marginRight="7dp"
-                                android:layout_weight="5"
-                                android:gravity="center"
-                                android:orientation="vertical">
-
-                                <ImageView
-                                    android:id="@+id/mission_12_image"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_alignParentLeft="true"
-                                    android:layout_weight="1"
-                                    android:adjustViewBounds="true"
-                                    android:contentDescription="@string/profile"
-                                    android:scaleType="fitCenter"
-                                    android:src="@drawable/ic_account" />
-
-                                <CheckBox
-                                    android:id="@+id/mission_12_text"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_weight="4"
-                                    android:adjustViewBounds="true"
-                                    android:gravity="center"
-                                    android:text="cb1"
-                                    android:textSize="15sp" />
-                            </LinearLayout>
-                        </LinearLayout>
-
+                        <CheckBox
+                            android:id="@+id/mission_11_text"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="4"
+                            android:adjustViewBounds="true"
+                            android:gravity="center"
+                            android:text="cb1"
+                            android:textSize="15sp" />
                     </LinearLayout>
 
                     <LinearLayout
-                        android:id="@+id/mission_2_layout"
+                        android:id="@+id/mission_12_layout"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_alignParentTop="true"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="7dp"
+                        android:layout_weight="5"
                         android:gravity="center"
                         android:orientation="vertical">
 
-                        <LinearLayout
-                            android:id="@+id/mission_2_form"
+                        <ImageView
+                            android:id="@+id/mission_12_image"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_alignParentTop="true"
-                            android:layout_marginStart="20dp"
-                            android:layout_marginTop="10dp"
-                            android:layout_marginEnd="20dp"
-                            android:layout_marginBottom="5dp"
-                            android:layout_weight="10"
-                            android:background="@drawable/mission"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentLeft="true"
+                            android:layout_weight="1"
+                            android:adjustViewBounds="true"
+                            android:contentDescription="@string/profile"
+                            android:scaleType="fitCenter"
+                            android:src="@drawable/ic_account" />
+
+                        <CheckBox
+                            android:id="@+id/mission_12_text"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="4"
+                            android:adjustViewBounds="true"
                             android:gravity="center"
-                            android:orientation="horizontal">
-
-                            <LinearLayout
-                                android:id="@+id/mission_21_layout"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:layout_alignParentTop="true"
-                                android:layout_marginLeft="7dp"
-                                android:layout_marginRight="10dp"
-                                android:layout_weight="5"
-                                android:gravity="center"
-                                android:orientation="vertical">
-
-                                <ImageView
-                                    android:id="@+id/mission_21_image"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_weight="1"
-                                    android:adjustViewBounds="true"
-                                    android:contentDescription="@string/profile"
-                                    android:scaleType="fitCenter"
-                                    android:src="@drawable/ic_account" />
-
-                                <CheckBox
-                                    android:id="@+id/mission_21_text"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_weight="4"
-                                    android:adjustViewBounds="true"
-                                    android:gravity="center"
-                                    android:text="cb1"
-                                    android:textSize="15sp" />
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:id="@+id/mission_22_layout"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:layout_alignParentTop="true"
-                                android:layout_marginLeft="10dp"
-                                android:layout_marginRight="7dp"
-                                android:layout_weight="5"
-                                android:gravity="center"
-                                android:orientation="vertical">
-
-                                <ImageView
-                                    android:id="@+id/mission_22_image"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_alignParentLeft="true"
-                                    android:layout_weight="1"
-                                    android:adjustViewBounds="true"
-                                    android:contentDescription="@string/profile"
-                                    android:scaleType="fitCenter"
-                                    android:src="@drawable/ic_account" />
-
-                                <CheckBox
-                                    android:id="@+id/mission_22_text"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_weight="4"
-                                    android:adjustViewBounds="true"
-                                    android:gravity="center"
-                                    android:text="cb1" />
-                            </LinearLayout>
-                        </LinearLayout>
+                            android:text="cb1"
+                            android:textSize="15sp" />
                     </LinearLayout>
                 </LinearLayout>
-            </ScrollView>
+            </LinearLayout>
 
-            <Button
-                android:id="@+id/add_btn"
-                android:layout_width="200dp"
-                android:layout_height="40dp"
-                android:layout_gravity="center"
-                android:layout_marginStart="20dp"
-                android:layout_marginEnd="20dp"
-                android:layout_marginBottom="5dp"
-                android:background="@drawable/mission"
-                android:text="광고를 보고 미션을 리셋해주세요!"
-                android:textColor="@color/black" />
+            <LinearLayout
+                android:id="@+id/mission_2_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentTop="true"
+                android:gravity="center"
+                android:orientation="vertical">
 
+                <LinearLayout
+                    android:id="@+id/mission_2_form"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_weight="10"
+                    android:background="@drawable/mission"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:id="@+id/mission_21_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginLeft="7dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_weight="5"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:id="@+id/mission_21_image"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:adjustViewBounds="true"
+                            android:contentDescription="@string/profile"
+                            android:scaleType="fitCenter"
+                            android:src="@drawable/ic_account" />
+
+                        <CheckBox
+                            android:id="@+id/mission_21_text"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="4"
+                            android:adjustViewBounds="true"
+                            android:gravity="center"
+                            android:text="cb1"
+                            android:textSize="15sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/mission_22_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="7dp"
+                        android:layout_weight="5"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:id="@+id/mission_22_image"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentLeft="true"
+                            android:layout_weight="1"
+                            android:adjustViewBounds="true"
+                            android:contentDescription="@string/profile"
+                            android:scaleType="fitCenter"
+                            android:src="@drawable/ic_account" />
+
+                        <CheckBox
+                            android:id="@+id/mission_22_text"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="4"
+                            android:adjustViewBounds="true"
+                            android:gravity="center"
+                            android:text="cb1" />
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/mission_3_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentTop="true"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/mission_3_form"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_weight="10"
+                    android:background="@drawable/mission"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:id="@+id/mission_31_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginLeft="7dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_weight="5"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:id="@+id/mission_31_image"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:adjustViewBounds="true"
+                            android:contentDescription="@string/profile"
+                            android:scaleType="fitCenter"
+                            android:src="@drawable/ic_account" />
+
+                        <CheckBox
+                            android:id="@+id/mission_31_text"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="4"
+                            android:adjustViewBounds="true"
+                            android:gravity="center"
+                            android:text="cb1"
+                            android:textSize="15sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/mission_32_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="7dp"
+                        android:layout_weight="5"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:id="@+id/mission_32_image"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentLeft="true"
+                            android:layout_weight="1"
+                            android:adjustViewBounds="true"
+                            android:contentDescription="@string/profile"
+                            android:scaleType="fitCenter"
+                            android:src="@drawable/ic_account" />
+
+                        <CheckBox
+                            android:id="@+id/mission_32_text"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="4"
+                            android:adjustViewBounds="true"
+                            android:gravity="center"
+                            android:text="cb1" />
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
         </LinearLayout>
-    </FrameLayout>
-</RelativeLayout>
+    </ScrollView>
+
+
+</LinearLayout>

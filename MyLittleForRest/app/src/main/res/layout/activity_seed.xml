@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/sunbackground"
     android:orientation="vertical"
     tools:context=".SeedActivity">
 
@@ -11,22 +12,22 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:textSize="30sp"
-        android:text="당신의 씨앗에게 이름을 부여해주세요!" />
+        android:text="씨앗에게 이름을 부여해주세요!"
+        android:textSize="30sp" />
 
     <EditText
         android:id="@+id/et_seed_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:maxLength="10"
-        android:hint="이름"/>
+        android:hint="이름"
+        android:maxLength="10" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:textSize="30sp"
-        android:text="당신의 씨앗을 골라주세요." />
+        android:text="씨앗을 골라주세요."
+        android:textSize="30sp" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -43,34 +44,86 @@
             android:useDefaultMargins="true">
 
             <ImageButton
-                android:id="@+id/seed1"
+                android:id="@+id/rose"
                 android:layout_width="100dp"
-                android:layout_height="100dp" />
+                android:layout_height="100dp"
+
+                android:adjustViewBounds="true"
+                android:background="@drawable/grid"
+                android:scaleType="fitCenter"
+                android:src="@drawable/rose" />
 
             <ImageButton
-                android:id="@+id/seed2"
+                android:id="@+id/sunflower"
                 android:layout_width="100dp"
-                android:layout_height="100dp" />
+                android:layout_height="100dp"
+                android:adjustViewBounds="true"
+                android:background="@drawable/grid"
+                android:scaleType="fitCenter"
+                android:src="@drawable/sunflower" />
 
             <ImageButton
-                android:id="@+id/seed3"
+                android:id="@+id/rosemoss"
                 android:layout_width="100dp"
-                android:layout_height="100dp" />
+                android:layout_height="100dp"
+                android:adjustViewBounds="true"
+                android:background="@drawable/grid"
+                android:scaleType="fitCenter"
+                android:src="@drawable/rosemoss" />
 
             <ImageButton
-                android:id="@+id/seed4"
+                android:id="@+id/forsythia"
                 android:layout_width="100dp"
-                android:layout_height="100dp" />
+                android:layout_height="100dp"
+                android:adjustViewBounds="true"
+                android:background="@drawable/grid"
+                android:scaleType="fitCenter"
+                android:src="@drawable/forsythia" />
 
             <ImageButton
-                android:id="@+id/seed5"
+                android:id="@+id/tulip"
                 android:layout_width="100dp"
-                android:layout_height="100dp" />
+                android:layout_height="100dp"
+                android:adjustViewBounds="true"
+                android:background="@drawable/grid"
+                android:scaleType="fitCenter"
+                android:src="@drawable/tulip" />
 
             <ImageButton
-                android:id="@+id/seed6"
+                android:id="@+id/cosmos"
                 android:layout_width="100dp"
-                android:layout_height="100dp" />
+                android:layout_height="100dp"
+                android:adjustViewBounds="true"
+                android:background="@drawable/grid"
+                android:scaleType="fitCenter"
+                android:src="@drawable/cosmos" />
+
+            <ImageButton
+                android:id="@+id/valley"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:adjustViewBounds="true"
+                android:background="@drawable/grid"
+                android:scaleType="fitCenter"
+                android:src="@drawable/valley" />
+
+            <ImageButton
+                android:id="@+id/mugunghwa"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:adjustViewBounds="true"
+                android:background="@drawable/grid"
+                android:scaleType="fitCenter"
+                android:src="@drawable/mugunghwa" />
+
+            <ImageButton
+                android:id="@+id/morninggory"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:adjustViewBounds="true"
+                android:background="@drawable/grid"
+                android:scaleType="fitCenter"
+                android:src="@drawable/morninggory" />
 
         </GridLayout>
     </LinearLayout>

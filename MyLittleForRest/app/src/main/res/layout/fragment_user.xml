@@ -100,6 +100,10 @@
         </LinearLayout>
     </RelativeLayout>
 
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center">
     <RadioGroup
         android:id="@+id/user_radio_group"
         android:layout_width="wrap_content"
@@ -123,8 +127,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Private"/>
-
     </RadioGroup>
+    <ImageView
+        android:id="@+id/book"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@drawable/ic_add_a_photo"
+        android:scaleType="fitCenter"
+        android:layout_gravity="right"/>
+    </FrameLayout>
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/account_recyclerview"
         android:layout_width="match_parent"

@@ -111,6 +111,9 @@ class UserFragment : Fragment() {
         }
         getProfileImage()
         getFollowersAndFollowings()
+
+        fragmentView?.book?.setOnClickListener {startActivity(Intent(this.context, BookActivity::class.java))}
+
         return fragmentView
     }
 
