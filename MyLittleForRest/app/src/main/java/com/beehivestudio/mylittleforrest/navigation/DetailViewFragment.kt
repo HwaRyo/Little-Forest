@@ -71,7 +71,7 @@ class DetailViewFragment : Fragment() {
             var uid = FirebaseAuth.getInstance().currentUser?.uid
             firestore?.collection("users")?.document(uid!!)?.get()?.addOnCompleteListener { task ->
                 if (task.isSuccessful) {
-                    var userDTO = task.result?.toObject(FollowDTO::class.java)
+                    var userDTO = task.result!!.toObject(FollowDTO::class.java)
                     if (userDTO?.followings != null) {
                         getCotents(userDTO?.followings)
                     }

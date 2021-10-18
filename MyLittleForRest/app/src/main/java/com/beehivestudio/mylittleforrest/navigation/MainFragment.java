@@ -112,13 +112,10 @@ public class MainFragment extends Fragment {
             ActivityCompat.requestPermissions((Activity) root.getContext(), new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION}, 0);
         } else {
             Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-            double longitude = location.getLongitude();
-            double latitude = location.getLatitude();
+
             lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 1, gpsLocationListener);
             lm.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 1000, 1, gpsLocationListener);
-            task = new phpDown();
 
-            task.execute("https://api.openweathermap.org/data/2.5/weather?lat=" + latitude + "&lon=" + longitude + "&appid=" + appKey);
         }
 
 
@@ -234,6 +231,10 @@ public class MainFragment extends Fragment {
             double longitude = location.getLongitude();
             double latitude = location.getLatitude();
             double altitude = location.getAltitude();
+
+            task = new phpDown();
+
+            task.execute("https://api.openweathermap.org/data/2.5/weather?lat=" + latitude + "&lon=" + longitude + "&appid=" + appKey);
         }
 
         public void onStatusChanged(String provider, int status, Bundle extras) {

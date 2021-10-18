@@ -1,26 +1,21 @@
 package com.beehivestudio.mylittleforrest
 
 import android.Manifest
-import android.content.Intent
+import android.app.Activity
 import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
-
 import android.view.MenuItem
 import android.view.View
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import com.beehivestudio.mylittleforrest.DetailViewFragment
-import com.beehivestudio.mylittleforrest.GridFragment
-import com.beehivestudio.mylittleforrest.R
 import com.beehivestudio.mylittleforrest.R.id.*
-import com.beehivestudio.mylittleforrest.UserFragment
 import com.beehivestudio.mylittleforrest.navigation.MainFragment
 import com.beehivestudio.mylittleforrest.navigation.MissionFragment
-import kotlinx.android.synthetic.main.activity_main.*
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
+import kotlinx.android.synthetic.main.activity_main.*
 
 
 class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener {
@@ -34,12 +29,6 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
         bottom_navigation.setOnNavigationItemSelectedListener(this)
         bottom_navigation.selectedItemId = R.id.action_main
 
-        // 앨범 접근 권한 요청
-        ActivityCompat.requestPermissions(
-            this,
-            arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),
-            1
-        )
     }
 
 
@@ -97,7 +86,6 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
                     .commit()
                 return true
             }
-
 
 
             R.id.action_account -> {
