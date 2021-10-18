@@ -23,7 +23,7 @@ import com.beehivestudio.mylittleforrest.AddPhotoActivity;
 import com.beehivestudio.mylittleforrest.LodingActivity;
 import com.beehivestudio.mylittleforrest.MainActivity;
 import com.beehivestudio.mylittleforrest.R;
-import com.beehivestudio.mylittleforrest.SeedActivity;
+//import com.beehivestudio.mylittleforrest.SeedActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
