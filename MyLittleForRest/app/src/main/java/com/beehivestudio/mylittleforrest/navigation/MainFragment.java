@@ -22,6 +22,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -75,23 +76,27 @@ public class MainFragment extends Fragment {
     TextView region;
     LocationManager lm;
     String weather;
-
+    FrameLayout back;
+    ImageView cloud1;
+    ImageView cloud2;
+    ImageView cloud3;
+    ImageView iv_weather;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_main, container, false);
-
+        back = root.findViewById(R.id.back);
         region = root.findViewById(R.id.region);
-        ImageView iv_weather = root.findViewById(R.id.iv_weather);
+        iv_weather = root.findViewById(R.id.iv_weather);
         TextView famous_saying = root.findViewById(R.id.famous_saying);
         ImageView iv_plant = root.findViewById(R.id.iv_plant);
         TextView plant_name = root.findViewById(R.id.plant_name);
         ProgressBar exp = root.findViewById(R.id.exp);
         ImageButton upload = root.findViewById(R.id.bt_upload);
 
-        ImageView cloud1 = root.findViewById(R.id.cloud1);
-        ImageView cloud2 = root.findViewById(R.id.cloud2);
-        ImageView cloud3 = root.findViewById(R.id.cloud3);
+        cloud1 = root.findViewById(R.id.cloud1);
+        cloud2 = root.findViewById(R.id.cloud2);
+        cloud3 = root.findViewById(R.id.cloud3);
 
         Animation animation1 = AnimationUtils.loadAnimation(root.getContext(), R.anim.translate1);
         Animation animation2 = AnimationUtils.loadAnimation(root.getContext(), R.anim.translate2);
@@ -138,7 +143,7 @@ public class MainFragment extends Fragment {
                     int attendance = Integer.parseInt(document.getString("date"));
                     plant_name.setText(document.getString("name"));
                     exp.setProgress(Integer.parseInt(document.getString("exp")));
-                    if (attendance - current_date <= 3) {
+                    if (current_date - attendance <= 3) {
                         if (exp.getProgress() > 70) {
                             String species = document.getString("species");
                             if (species.equals("rose"))
@@ -178,15 +183,15 @@ public class MainFragment extends Fragment {
 //                                Glide.with(root.getContext())
 //                                        .load(R.drawable.morninggory)
 //                                        .into(iv_plant);
-                        }else {
+                        } else {
                             //새싹파트
                             Glide.with(root.getContext())
-                                    .load(R.drawable.valley)
+                                    .load(R.drawable.seed)
                                     .into(iv_plant);
                         }
                     } else {
                         Glide.with(root.getContext())
-                                .load(R.drawable.mugunghwa)
+                                .load(R.drawable.death)
                                 .into(iv_plant);
                     }
                 } else {/*파베에서 데이터 가져오기 실패할때*/}
@@ -295,6 +300,21 @@ public class MainFragment extends Fragment {
                 String city = jsonObject.getString("name");
                 region.setText("지역 : " + city + "\n온도 : " + String.valueOf(temperature) + "ºC\n습도 : " + humidity + "%\n기상 : " + weather);
 
+                if(weather.equals("Clear")) {
+                    back.setBackgroundResource(R.drawable.clooudbackground);
+                    Glide.with(getContext())
+                            .load(R.drawable.blackcloud)
+                            .into(cloud1);
+                    Glide.with(getContext())
+                            .load(R.drawable.blackcloud)
+                            .into(cloud2);
+                    Glide.with(getContext())
+                            .load(R.drawable.blackcloud)
+                            .into(cloud3);
+                    Glide.with(getContext())
+                            .load(R.drawable.blackcloud)
+                            .into(iv_weather);
+                }
             } catch (Exception e) {
                 e.printStackTrace();
             }

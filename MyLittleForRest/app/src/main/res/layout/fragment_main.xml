@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/back"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/sunbackground"
@@ -9,86 +10,104 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="2"/>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="bottom"
+                android:layout_weight="2"
+                android:background="@drawable/hill" />
+        </LinearLayout>
+
         <ImageView
             android:id="@+id/iv_weather"
             android:layout_width="150dp"
             android:layout_height="150dp"
-            android:background="@drawable/sun"
+            android:src="@drawable/sun"
             android:gravity="bottom" />
 
         <ImageView
             android:id="@+id/cloud1"
             android:layout_width="200dp"
             android:layout_height="100dp"
-            android:src="@drawable/cloud"/>
+            android:src="@drawable/cloud" />
 
         <ImageView
             android:id="@+id/cloud2"
             android:layout_width="200dp"
             android:layout_height="100dp"
             android:layout_margin="100dp"
-            android:src="@drawable/cloud"/>
+            android:src="@drawable/cloud" />
 
         <ImageView
             android:id="@+id/cloud3"
             android:layout_width="200dp"
             android:layout_height="100dp"
             android:layout_gravity="center"
-            android:src="@drawable/cloud"/>
+            android:src="@drawable/cloud" />
 
         <TextView
             android:id="@+id/region"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="10sp" />
+            android:textSize="25sp" />
 
         <ImageButton
             android:id="@+id/bt_upload"
-            android:background="@android:color/transparent"
-            android:layout_gravity="right"
             android:layout_width="80dp"
             android:layout_height="80dp"
+            android:layout_gravity="right"
             android:adjustViewBounds="true"
+            android:background="@android:color/transparent"
             android:scaleType="fitCenter"
             android:src="@android:drawable/ic_menu_add" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/famous_saying"
+                android:layout_width="300dp"
+                android:layout_height="80dp"
+                android:adjustViewBounds="true"
+                android:background="@drawable/speech_bubble"
                 android:gravity="center"
-                android:orientation="vertical">
+                android:padding="10dp"
+                android:scaleType="fitXY"
+                android:textSize="15sp" />
 
-                <TextView
-                    android:id="@+id/famous_saying"
-                    android:layout_width="300dp"
-                    android:layout_height="80dp"
-                    android:background="@drawable/speech_bubble"
-                    android:gravity="center"
-                    android:adjustViewBounds="true"
-                    android:scaleType="fitXY"
-                    android:padding="10dp"
-                    android:textSize="15sp" />
+            <ImageView
+                android:id="@+id/iv_plant"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:adjustViewBounds="true"
+                android:scaleType="fitCenter" />
 
-                <ImageView
-                    android:id="@+id/iv_plant"
-                    android:layout_width="match_parent"
-                    android:layout_height="300dp"
-                    android:adjustViewBounds="true"
-                    android:scaleType="fitCenter"/>
-
-                <TextView
-                    android:id="@+id/plant_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="25sp" />
+            <TextView
+                android:id="@+id/plant_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="25sp" />
 
 
-                <ProgressBar
-                    android:id="@+id/exp"
-                    style="@android:style/Widget.ProgressBar.Horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:max="100" />
-            </LinearLayout>
+            <ProgressBar
+                android:id="@+id/exp"
+                style="@android:style/Widget.ProgressBar.Horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:max="100" />
+        </LinearLayout>
     </FrameLayout>
 </FrameLayout>

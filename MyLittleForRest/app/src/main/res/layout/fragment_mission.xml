@@ -79,7 +79,7 @@
                             android:adjustViewBounds="true"
                             android:contentDescription="@string/profile"
                             android:scaleType="fitCenter"
-                            android:src="@drawable/ic_account" />
+                            android:src="@drawable/seed" />
 
                         <CheckBox
                             android:id="@+id/mission_11_text"
@@ -88,7 +88,6 @@
                             android:layout_weight="4"
                             android:adjustViewBounds="true"
                             android:gravity="center"
-                            android:text="cb1"
                             android:textSize="15sp" />
                     </LinearLayout>
 
@@ -112,7 +111,7 @@
                             android:adjustViewBounds="true"
                             android:contentDescription="@string/profile"
                             android:scaleType="fitCenter"
-                            android:src="@drawable/ic_account" />
+                            android:src="@drawable/seed" />
 
                         <CheckBox
                             android:id="@+id/mission_12_text"
@@ -121,7 +120,6 @@
                             android:layout_weight="4"
                             android:adjustViewBounds="true"
                             android:gravity="center"
-                            android:text="cb1"
                             android:textSize="15sp" />
                     </LinearLayout>
                 </LinearLayout>
@@ -168,7 +166,7 @@
                             android:adjustViewBounds="true"
                             android:contentDescription="@string/profile"
                             android:scaleType="fitCenter"
-                            android:src="@drawable/ic_account" />
+                            android:src="@drawable/seed" />
 
                         <CheckBox
                             android:id="@+id/mission_21_text"
@@ -177,7 +175,6 @@
                             android:layout_weight="4"
                             android:adjustViewBounds="true"
                             android:gravity="center"
-                            android:text="cb1"
                             android:textSize="15sp" />
                     </LinearLayout>
 
@@ -201,7 +198,7 @@
                             android:adjustViewBounds="true"
                             android:contentDescription="@string/profile"
                             android:scaleType="fitCenter"
-                            android:src="@drawable/ic_account" />
+                            android:src="@drawable/seed" />
 
                         <CheckBox
                             android:id="@+id/mission_22_text"
@@ -209,8 +206,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="4"
                             android:adjustViewBounds="true"
-                            android:gravity="center"
-                            android:text="cb1" />
+                            android:gravity="center" />
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
@@ -256,7 +252,7 @@
                             android:adjustViewBounds="true"
                             android:contentDescription="@string/profile"
                             android:scaleType="fitCenter"
-                            android:src="@drawable/ic_account" />
+                            android:src="@drawable/seed" />
 
                         <CheckBox
                             android:id="@+id/mission_31_text"
@@ -265,7 +261,6 @@
                             android:layout_weight="4"
                             android:adjustViewBounds="true"
                             android:gravity="center"
-                            android:text="cb1"
                             android:textSize="15sp" />
                     </LinearLayout>
 
@@ -289,7 +284,7 @@
                             android:adjustViewBounds="true"
                             android:contentDescription="@string/profile"
                             android:scaleType="fitCenter"
-                            android:src="@drawable/ic_account" />
+                            android:src="@drawable/seed" />
 
                         <CheckBox
                             android:id="@+id/mission_32_text"
@@ -297,8 +292,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="4"
                             android:adjustViewBounds="true"
-                            android:gravity="center"
-                            android:text="cb1" />
+                            android:gravity="center" />
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>

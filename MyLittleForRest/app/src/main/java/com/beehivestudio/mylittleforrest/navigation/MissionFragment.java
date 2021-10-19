@@ -54,7 +54,6 @@ public class MissionFragment extends Fragment {
     int mission[] = new int[6];
 
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -73,7 +72,6 @@ public class MissionFragment extends Fragment {
         CheckBox mission_22_text = root.findViewById(R.id.mission_22_text);
         CheckBox mission_31_text = root.findViewById(R.id.mission_31_text);
         CheckBox mission_32_text = root.findViewById(R.id.mission_32_text);
-
 
         db.collection("MissionCheck").document(uid).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
@@ -123,39 +121,21 @@ public class MissionFragment extends Fragment {
                                 DocumentSnapshot document = task.getResult();
                                 switch (count) {
                                     case 0:
-//                                Glide.with(root.getContext())
-//                                        .load(url)
-//                                        .into(mission_11_image);
                                         mission_11_text.setText(document.getString("content"));
                                         break;
                                     case 1:
-//                                Glide.with(root.getContext())
-//                                        .load(url)
-//                                        .into(mission_12_image);
                                         mission_12_text.setText(document.getString("content"));
                                         break;
                                     case 2:
-//                                Glide.with(root.getContext())
-//                                        .load(url)
-//                                        .into(mission_21_image);
                                         mission_21_text.setText(document.getString("content"));
                                         break;
                                     case 3:
-//                                Glide.with(root.getContext())
-//                                        .load(url)
-//                                        .into(mission_22_image);
                                         mission_22_text.setText(document.getString("content"));
                                         break;
                                     case 4:
-//                                Glide.with(root.getContext())
-//                                        .load(url)
-//                                        .into(mission_21_image);
                                         mission_31_text.setText(document.getString("content"));
                                         break;
                                     case 5:
-//                                Glide.with(root.getContext())
-//                                        .load(url)
-//                                        .into(mission_22_image);
                                         mission_32_text.setText(document.getString("content"));
                                         break;
                                 }
@@ -184,15 +164,44 @@ public class MissionFragment extends Fragment {
 
                         db.collection("MissionClear").document(uid).set(missionclear);
                     } else {
-                        mission_11_text.setChecked(document.getBoolean("mission1"));
-                        mission_12_text.setChecked(document.getBoolean("mission2"));
-                        mission_21_text.setChecked(document.getBoolean("mission3"));
-                        mission_22_text.setChecked(document.getBoolean("mission4"));
-                        mission_31_text.setChecked(document.getBoolean("mission5"));
-                        mission_32_text.setChecked(document.getBoolean("mission6"));
+                        if (document.getBoolean("mission1")) {
+                            Glide.with(root.getContext())
+                                    .load(R.drawable.forsythia)
+                                    .into(mission_11_image);
+                            mission_11_text.setChecked(true);
+                        }
+                        if (document.getBoolean("mission2")) {
+                            Glide.with(root.getContext())
+                                    .load(R.drawable.tulip)
+                                    .into(mission_12_image);
+                            mission_12_text.setChecked(true);
+                        }
+                        if (document.getBoolean("mission3")) {
+                            Glide.with(root.getContext())
+                                    .load(R.drawable.cosmos)
+                                    .into(mission_21_image);
+                            mission_21_text.setChecked(true);
+                        }
+                        if (document.getBoolean("mission4")) {
+                            Glide.with(root.getContext())
+                                    .load(R.drawable.mugunghwa)
+                                    .into(mission_22_image);
+                            mission_22_text.setChecked(true);
+                        }
+                        if (document.getBoolean("mission5")) {
+                            Glide.with(root.getContext())
+                                    .load(R.drawable.morninggory)
+                                    .into(mission_31_image);
+                            mission_31_text.setChecked(true);
+                        }
+                        if (document.getBoolean("mission6")) {
+                            Glide.with(root.getContext())
+                                    .load(R.drawable.valley)
+                                    .into(mission_32_image);
+                            mission_32_text.setChecked(true);
+                        }
                     }
                 }
-
             }
         });
 
@@ -211,12 +220,14 @@ public class MissionFragment extends Fragment {
                         public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                             if (task.isSuccessful()) {
                                 DocumentSnapshot document = task.getResult();
+                                Glide.with(root.getContext())
+                                        .load(R.drawable.forsythia)
+                                        .into(mission_11_image);
                                 user.put("date", date);
                                 current_exp[0] = Integer.parseInt(document.getString("exp"));
                                 user.put("exp", String.valueOf(current_exp[0] + 1));
                                 user.put("name", document.getString("name"));
                                 user.put("species", document.getString("species"));
-
                                 db.collection("Seed").document(uid).set(user);
                             }
                         }
@@ -231,7 +242,7 @@ public class MissionFragment extends Fragment {
                     check.put("mission6", mission_32_text.isChecked());
 
                     db.collection("MissionClear").document(uid).set(check);
-                }else{
+                } else {
                     mission_11_text.setChecked(true);
                 }
             }
@@ -251,6 +262,9 @@ public class MissionFragment extends Fragment {
                         public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                             if (task.isSuccessful()) {
                                 DocumentSnapshot document = task.getResult();
+                                Glide.with(root.getContext())
+                                        .load(R.drawable.tulip)
+                                        .into(mission_12_image);
                                 user.put("date", date);
                                 current_exp[0] = Integer.parseInt(document.getString("exp"));
                                 user.put("exp", String.valueOf(current_exp[0] + 1));
@@ -271,7 +285,7 @@ public class MissionFragment extends Fragment {
                     check.put("mission6", mission_32_text.isChecked());
 
                     db.collection("MissionClear").document(uid).set(check);
-                }else{
+                } else {
                     mission_12_text.setChecked(true);
                 }
             }
@@ -291,6 +305,9 @@ public class MissionFragment extends Fragment {
                         public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                             if (task.isSuccessful()) {
                                 DocumentSnapshot document = task.getResult();
+                                Glide.with(root.getContext())
+                                        .load(R.drawable.cosmos)
+                                        .into(mission_21_image);
                                 user.put("date", date);
                                 current_exp[0] = Integer.parseInt(document.getString("exp"));
                                 user.put("exp", String.valueOf(current_exp[0] + 1));
@@ -311,7 +328,7 @@ public class MissionFragment extends Fragment {
                     check.put("mission6", mission_32_text.isChecked());
 
                     db.collection("MissionClear").document(uid).set(check);
-                }else{
+                } else {
                     mission_21_text.setChecked(true);
                 }
             }
@@ -331,6 +348,9 @@ public class MissionFragment extends Fragment {
                         public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                             if (task.isSuccessful()) {
                                 DocumentSnapshot document = task.getResult();
+                                Glide.with(root.getContext())
+                                        .load(R.drawable.mugunghwa)
+                                        .into(mission_22_image);
                                 user.put("date", date);
                                 current_exp[0] = Integer.parseInt(document.getString("exp"));
                                 user.put("exp", String.valueOf(current_exp[0] + 1));
@@ -351,7 +371,7 @@ public class MissionFragment extends Fragment {
                     check.put("mission6", mission_32_text.isChecked());
 
                     db.collection("MissionClear").document(uid).set(check);
-                }else{
+                } else {
                     mission_22_text.setChecked(true);
                 }
             }
@@ -371,6 +391,9 @@ public class MissionFragment extends Fragment {
                         public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                             if (task.isSuccessful()) {
                                 DocumentSnapshot document = task.getResult();
+                                Glide.with(root.getContext())
+                                        .load(R.drawable.morninggory)
+                                        .into(mission_31_image);
                                 user.put("date", date);
                                 current_exp[0] = Integer.parseInt(document.getString("exp"));
                                 user.put("exp", String.valueOf(current_exp[0] + 1));
@@ -391,7 +414,7 @@ public class MissionFragment extends Fragment {
                     check.put("mission6", mission_32_text.isChecked());
 
                     db.collection("MissionClear").document(uid).set(check);
-                }else{
+                } else {
                     mission_31_text.setChecked(true);
                 }
             }
@@ -411,6 +434,9 @@ public class MissionFragment extends Fragment {
                         public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                             if (task.isSuccessful()) {
                                 DocumentSnapshot document = task.getResult();
+                                Glide.with(root.getContext())
+                                        .load(R.drawable.valley)
+                                        .into(mission_32_image);
                                 user.put("date", date);
                                 current_exp[0] = Integer.parseInt(document.getString("exp"));
                                 user.put("exp", String.valueOf(current_exp[0] + 1));
@@ -431,7 +457,7 @@ public class MissionFragment extends Fragment {
                     check.put("mission6", mission_32_text.isChecked());
 
                     db.collection("MissionClear").document(uid).set(check);
-                }else{
+                } else {
                     mission_32_text.setChecked(true);
                 }
             }
