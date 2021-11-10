@@ -24,8 +24,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="3dp"
-            android:contentDescription="@string/app_name"
-            android:src="@drawable/logo_title" />
+            android:contentDescription="@string/app_name" />
 
     </androidx.appcompat.widget.Toolbar>
 
@@ -54,18 +53,18 @@
                 android:id="@+id/rb_public"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Public"
-                android:checked="true"/>
+                android:checked="true"
+                android:text="Public" />
 
             <TextView
                 android:layout_width="50dp"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content" />
 
             <RadioButton
                 android:id="@+id/rb_private"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Private"/>
+                android:text="Private" />
 
         </RadioGroup>
 
@@ -75,44 +74,53 @@
             android:layout_height="250dp"
             android:layout_below="@id/toolbar_division"
             android:layout_alignParentLeft="true"
+            android:layout_margin="8dp"
             android:adjustViewBounds="true"
             android:scaleType="fitCenter"
-            android:layout_margin="8dp"
             tools:src="@drawable/ic_account" />
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/edittext"
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/toolbar_division"
-            android:layout_margin="8dp"
-            android:layout_toRightOf="@id/addphoto_image">
+            android:layout_height="match_parent">
 
-            <EditText
-                android:id="@+id/addphoto_edit_explain"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="300dp"
-                android:gravity="top"
-                android:hint="글을 적어 주세요. (500자 제한)"
-                android:inputType="textMultiLine"
-                android:scrollHorizontally="false"
-                android:maxLength="1000"/>
-        </com.google.android.material.textfield.TextInputLayout>
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
-        <Button
-            android:id="@+id/addphoto_btn_upload"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/edittext"
-            android:layout_margin="8dp"
-            android:layout_toRightOf="@id/addphoto_image"
-            android:text="UPLOAD"
-            android:theme="@style/ButtonStyle" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/edittext"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/toolbar_division"
+                android:layout_margin="8dp"
+                android:layout_toRightOf="@id/addphoto_image">
+
+                <EditText
+                    android:id="@+id/addphoto_edit_explain"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:gravity="top"
+                    android:hint="글을 적어 주세요. (500자 제한)"
+                    android:inputType="textMultiLine"
+                    android:maxLength="1000"
+                    android:scrollHorizontally="false" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Button
+                android:id="@+id/addphoto_btn_upload"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/edittext"
+                android:layout_margin="8dp"
+                android:layout_toRightOf="@id/addphoto_image"
+                android:text="UPLOAD"
+                android:theme="@style/ButtonStyle" />
+            </LinearLayout>
+        </ScrollView>
 
     </LinearLayout>
     <!-- Contents -->
-
-
-
 
 </LinearLayout>

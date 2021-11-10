@@ -42,7 +42,7 @@ class UserFragment : Fragment() {
     var currentUserUid: String? = null
     var followingListenerRegistration: ListenerRegistration? = null
     var followListenerRegistration: ListenerRegistration? = null
-    var data_document : ArrayList<String> = arrayListOf()
+    var data_document: ArrayList<String> = arrayListOf()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -91,7 +91,7 @@ class UserFragment : Fragment() {
             if (uid == currentUserUid) {
                 fragmentView?.account_recyclerview?.adapter =
                     UserFragmentRecyclerViewAdapter("private")
-            }else {
+            } else {
                 Toast.makeText(fragmentView?.context, "Private는 자신만 볼 수 있습니다!", Toast.LENGTH_SHORT)
                     .show()
                 fragmentView?.user_radio_group?.check(fragmentView?.user_rb_public?.id!!)
@@ -117,7 +117,14 @@ class UserFragment : Fragment() {
         getFollowing()
         getFollower()
 
-        fragmentView?.book?.setOnClickListener {startActivity(Intent(this.context, BookActivity::class.java))}
+
+        fragmentView?.book?.setOnClickListener {
+            if (uid == currentUserUid) {
+                startActivity(Intent(this.context, BookActivity::class.java))
+            } else {
+                Toast.makeText(this.context, "자신의 도감만 확인할 수 있습니다.", Toast.LENGTH_SHORT).show()
+            }
+        }
 
         return fragmentView
     }
@@ -199,36 +206,45 @@ class UserFragment : Fragment() {
     }
 
     fun getFollowing() {
-        followingListenerRegistration = firestore?.collection("users")?.document(uid!!)?.addSnapshotListener { documentSnapshot, firebaseFirestoreException ->
-            val followDTO = documentSnapshot?.toObject(FollowDTO::class.java)
-            if (followDTO == null) return@addSnapshotListener
-            fragmentView!!.account_tv_following_count.text = followDTO?.followingCount.toString()
-        }
+        followingListenerRegistration = firestore?.collection("users")?.document(uid!!)
+            ?.addSnapshotListener { documentSnapshot, firebaseFirestoreException ->
+                val followDTO = documentSnapshot?.toObject(FollowDTO::class.java)
+                if (followDTO == null) return@addSnapshotListener
+                fragmentView!!.account_tv_following_count.text =
+                    followDTO?.followingCount.toString()
+            }
     }
 
 
     fun getFollower() {
 
-        followListenerRegistration = firestore?.collection("users")?.document(uid!!)?.addSnapshotListener { documentSnapshot, firebaseFirestoreException ->
-            val followDTO = documentSnapshot?.toObject(FollowDTO::class.java)
-            if (followDTO == null) return@addSnapshotListener
-            fragmentView?.account_tv_follower_count?.text = followDTO?.followerCount.toString()
-            if (followDTO?.followers?.containsKey(currentUserUid)!!) {
+        followListenerRegistration = firestore?.collection("users")?.document(uid!!)
+            ?.addSnapshotListener { documentSnapshot, firebaseFirestoreException ->
+                val followDTO = documentSnapshot?.toObject(FollowDTO::class.java)
+                if (followDTO == null) return@addSnapshotListener
+                fragmentView?.account_tv_follower_count?.text = followDTO?.followerCount.toString()
+                if (followDTO?.followers?.containsKey(currentUserUid)!!) {
 
-                fragmentView?.account_btn_follow_signout?.text = getString(R.string.follow_cancel)
-                fragmentView?.account_btn_follow_signout
-                    ?.background
-                    ?.setColorFilter(ContextCompat.getColor(requireActivity(), R.color.colorLightGray), PorterDuff.Mode.MULTIPLY)
-            } else {
+                    fragmentView?.account_btn_follow_signout?.text =
+                        getString(R.string.follow_cancel)
+                    fragmentView?.account_btn_follow_signout
+                        ?.background
+                        ?.setColorFilter(
+                            ContextCompat.getColor(
+                                requireActivity(),
+                                R.color.colorLightGray
+                            ), PorterDuff.Mode.MULTIPLY
+                        )
+                } else {
 
-                if (uid != currentUserUid) {
+                    if (uid != currentUserUid) {
 
-                    fragmentView?.account_btn_follow_signout?.text = getString(R.string.follow)
-                    fragmentView?.account_btn_follow_signout?.background?.colorFilter = null
+                        fragmentView?.account_btn_follow_signout?.text = getString(R.string.follow)
+                        fragmentView?.account_btn_follow_signout?.background?.colorFilter = null
+                    }
                 }
-            }
 
-        }
+            }
 
     }
 
@@ -285,7 +301,7 @@ class UserFragment : Fragment() {
             Glide.with(holder.itemView.context).load(contentDTOs[position].imageUrl)
                 .apply(RequestOptions().centerCrop()).into(imageview)
 
-            holder.itemView.setOnClickListener{
+            holder.itemView.setOnClickListener {
 
                 val nextIntent = Intent(fragmentView?.context, ContentDetailActivity::class.java)
                 nextIntent.putExtra("imageUrl", contentDTOs[position].imageUrl)
@@ -302,6 +318,7 @@ class UserFragment : Fragment() {
         }
 
     }
+
     override fun onStop() {
         super.onStop()
         followListenerRegistration?.remove()

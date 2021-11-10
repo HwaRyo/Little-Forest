@@ -60,10 +60,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainFragment extends Fragment {
 
-    phpDown task;
-
-    private final static String appKey = "9c8c143b1bb0efd33f5f41282b0b5075";
-
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     String uid = user.getUid();
@@ -81,6 +77,7 @@ public class MainFragment extends Fragment {
     ImageView cloud2;
     ImageView cloud3;
     ImageView iv_weather;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -107,21 +104,42 @@ public class MainFragment extends Fragment {
         cloud3.startAnimation(animation3);
         iv_weather.startAnimation(animation4);
 
-        lm = (LocationManager) getContext().getSystemService(Context.LOCATION_SERVICE);
 
         Random rand = new Random();
         int saying_num = rand.nextInt(10) + 1;
 
 
-        if (Build.VERSION.SDK_INT >= 23 && ContextCompat.checkSelfPermission(root.getContext(), android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions((Activity) root.getContext(), new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION}, 0);
-        } else {
-            Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-
-            lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 1, gpsLocationListener);
-            lm.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 1000, 1, gpsLocationListener);
-
-        }
+        db.collection("gps").document(uid).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    String temperature = document.getString("temperature");
+                    //현재습도
+                    String humidity = document.getString("humidity");
+                    //현재날씨
+                    String weather = document.getString("weather");
+                    //도시
+                    String city = document.getString("city");
+                    region.setText("지역 : " + city + "\n온도 : " + temperature + "ºC\n습도 : " + humidity + "%\n기상 : " + weather);
+                    if (weather.equals("Clouds")) {
+                        back.setBackgroundResource(R.drawable.clooudbackground);
+                        Glide.with(getContext())
+                                .load(R.drawable.blackcloud)
+                                .into(cloud1);
+                        Glide.with(getContext())
+                                .load(R.drawable.blackcloud)
+                                .into(cloud2);
+                        Glide.with(getContext())
+                                .load(R.drawable.blackcloud)
+                                .into(cloud3);
+                        Glide.with(getContext())
+                                .load(R.drawable.blackcloud)
+                                .into(iv_weather);
+                    }
+                }
+            }
+        });
 
 
         db.collection("saying").document(String.valueOf(saying_num)).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -193,6 +211,15 @@ public class MainFragment extends Fragment {
                         Glide.with(root.getContext())
                                 .load(R.drawable.death)
                                 .into(iv_plant);
+                        iv_plant.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                Toast.makeText(root.getContext(), "꽃이 시들었습니다. 다시키워주세요.", Toast.LENGTH_SHORT).show();
+
+                                Intent intent = new Intent(root.getContext(), SeedActivity.class);
+                                startActivity(intent);
+                            }
+                        });
                     }
                 } else {/*파베에서 데이터 가져오기 실패할때*/}
             }
@@ -227,97 +254,5 @@ public class MainFragment extends Fragment {
         });
 
         return root;
-    }
-
-
-    final LocationListener gpsLocationListener = new LocationListener() {
-        public void onLocationChanged(Location location) {
-            String provider = location.getProvider();
-            double longitude = location.getLongitude();
-            double latitude = location.getLatitude();
-            double altitude = location.getAltitude();
-
-            task = new phpDown();
-
-            task.execute("https://api.openweathermap.org/data/2.5/weather?lat=" + latitude + "&lon=" + longitude + "&appid=" + appKey);
-        }
-
-        public void onStatusChanged(String provider, int status, Bundle extras) {
-        }
-
-        public void onProviderEnabled(String provider) {
-        }
-
-        public void onProviderDisabled(String provider) {
-        }
-    };
-
-
-    private class phpDown extends AsyncTask<String, Integer, String> {
-        @Override
-        protected String doInBackground(String... urls) {
-            StringBuilder jsonHtml = new StringBuilder();
-            try {
-                // 연결 url 설정
-                URL url = new URL(urls[0]);
-                // 커넥션 객체 생성
-                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-                // 연결되었으면.
-                if (conn != null) {
-                    conn.setConnectTimeout(10000);
-                    conn.setUseCaches(false);
-                    // 연결되었음 코드가 리턴되면.
-                    if (conn.getResponseCode() == HttpURLConnection.HTTP_OK) {
-                        BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
-                        for (; ; ) {
-                            // 웹상에 보여지는 텍스트를 라인단위로 읽어 저장.
-                            String line = br.readLine();
-                            if (line == null) break;
-                            // 저장된 텍스트 라인을 jsonHtml에 붙여넣음
-                            jsonHtml.append(line + "\n");
-                        }
-                        br.close();
-                    }
-                    conn.disconnect();
-                }
-            } catch (Exception ex) {
-                ex.printStackTrace();
-            }
-            return jsonHtml.toString();
-        }
-
-
-        protected void onPostExecute(String str) {
-            try {
-                JSONObject jsonObject = new JSONObject(str);
-                //현재온도
-                int temperature = jsonObject.getJSONObject("main").getInt("temp") - 273;
-                //현재습도
-                String humidity = jsonObject.getJSONObject("main").getString("humidity");
-                //현재날씨
-                weather = jsonObject.getJSONArray("weather").getJSONObject(0).getString("main");
-                //도시
-                String city = jsonObject.getString("name");
-                region.setText("지역 : " + city + "\n온도 : " + String.valueOf(temperature) + "ºC\n습도 : " + humidity + "%\n기상 : " + weather);
-
-                if(weather.equals("Clear")) {
-                    back.setBackgroundResource(R.drawable.clooudbackground);
-                    Glide.with(getContext())
-                            .load(R.drawable.blackcloud)
-                            .into(cloud1);
-                    Glide.with(getContext())
-                            .load(R.drawable.blackcloud)
-                            .into(cloud2);
-                    Glide.with(getContext())
-                            .load(R.drawable.blackcloud)
-                            .into(cloud3);
-                    Glide.with(getContext())
-                            .load(R.drawable.blackcloud)
-                            .into(iv_weather);
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
     }
 }
