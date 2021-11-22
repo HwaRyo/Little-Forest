@@ -4,14 +4,7 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="532e528c-d429-4e0c-994b-825f5ce2adcd" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/MyLittleForRest/app/src/main/java/com/beehivestudio/mylittleforrest/DB/DBOpenHelper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MyLittleForRest/app/src/main/java/com/beehivestudio/mylittleforrest/DB/MissionDB.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MyLittleForRest/app/src/main/res/drawable/mission.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MyLittleForRest/app/src/main/java/com/beehivestudio/mylittleforrest/navigation/MissionFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/MyLittleForRest/app/src/main/java/com/beehivestudio/mylittleforrest/navigation/MissionFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MyLittleForRest/app/src/main/res/drawable/ic_outline_local_play_24px.xml" beforeDir="false" afterPath="$PROJECT_DIR$/MyLittleForRest/app/src/main/res/drawable/ic_outline_local_play_24px.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MyLittleForRest/app/src/main/res/layout/fragment_mission.xml" beforeDir="false" afterPath="$PROJECT_DIR$/MyLittleForRest/app/src/main/res/layout/fragment_mission.xml" afterDir="false" />
-    </list>
+    <list default="true" id="532e528c-d429-4e0c-994b-825f5ce2adcd" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
