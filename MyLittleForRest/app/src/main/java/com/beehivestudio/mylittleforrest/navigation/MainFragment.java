@@ -76,6 +76,10 @@ public class MainFragment extends Fragment {
     ImageView cloud1;
     ImageView cloud2;
     ImageView cloud3;
+    ImageView rain1;
+    ImageView rain2;
+    ImageView rain3;
+    ImageView rain4;
     ImageView iv_weather;
 
     @Override
@@ -90,15 +94,25 @@ public class MainFragment extends Fragment {
         TextView plant_name = root.findViewById(R.id.plant_name);
         ProgressBar exp = root.findViewById(R.id.exp);
         ImageButton upload = root.findViewById(R.id.bt_upload);
+        region.bringToFront();
 
         cloud1 = root.findViewById(R.id.cloud1);
         cloud2 = root.findViewById(R.id.cloud2);
         cloud3 = root.findViewById(R.id.cloud3);
+        rain1 = root.findViewById(R.id.rain1);
+        rain2 = root.findViewById(R.id.rain2);
+        rain3 = root.findViewById(R.id.rain3);
+        rain4 = root.findViewById(R.id.rain4);
+
 
         Animation animation1 = AnimationUtils.loadAnimation(root.getContext(), R.anim.translate1);
         Animation animation2 = AnimationUtils.loadAnimation(root.getContext(), R.anim.translate2);
         Animation animation3 = AnimationUtils.loadAnimation(root.getContext(), R.anim.translate3);
         Animation animation4 = AnimationUtils.loadAnimation(root.getContext(), R.anim.translate4);
+        Animation animation5 = AnimationUtils.loadAnimation(root.getContext(), R.anim.translate5);
+        Animation animation6 = AnimationUtils.loadAnimation(root.getContext(), R.anim.translate6);
+        Animation animation7 = AnimationUtils.loadAnimation(root.getContext(), R.anim.translate7);
+        Animation animation8 = AnimationUtils.loadAnimation(root.getContext(), R.anim.translate8);
         cloud1.startAnimation(animation1);
         cloud2.startAnimation(animation2);
         cloud3.startAnimation(animation3);
@@ -122,7 +136,7 @@ public class MainFragment extends Fragment {
                     //도시
                     String city = document.getString("city");
                     region.setText("지역 : " + city + "\n온도 : " + temperature + "ºC\n습도 : " + humidity + "%\n기상 : " + weather);
-                    if (weather.equals("Clouds")) {
+                    if (weather.equals("Clouds")||weather.equals("Mist")) {
                         back.setBackgroundResource(R.drawable.clooudbackground);
                         Glide.with(getContext())
                                 .load(R.drawable.blackcloud)
@@ -136,6 +150,28 @@ public class MainFragment extends Fragment {
                         Glide.with(getContext())
                                 .load(R.drawable.blackcloud)
                                 .into(iv_weather);
+                    }else if (weather.equals("Rain")) {
+                        back.setBackgroundResource(R.drawable.clooudbackground);
+                        Glide.with(getContext())
+                                .load(R.drawable.blackcloud)
+                                .into(cloud1);
+                        Glide.with(getContext())
+                                .load(R.drawable.blackcloud)
+                                .into(cloud2);
+                        Glide.with(getContext())
+                                .load(R.drawable.blackcloud)
+                                .into(cloud3);
+                        Glide.with(getContext())
+                                .load(R.drawable.blackcloud)
+                                .into(iv_weather);
+                        rain1.setAlpha(0.3f);
+                        rain2.setAlpha(0.3f);
+                        rain3.setAlpha(0.3f);
+                        rain4.setAlpha(0.3f);
+                        rain1.startAnimation(animation5);
+                        rain2.startAnimation(animation6);
+                        rain3.startAnimation(animation7);
+                        rain4.startAnimation(animation8);
                     }
                 }
             }

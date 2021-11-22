@@ -55,6 +55,39 @@
             android:layout_gravity="center"
             android:src="@drawable/cloud" />
 
+        <ImageView
+            android:id="@+id/rain1"
+            android:layout_width="200dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center"
+            android:alpha="0"
+            android:rotation="@integer/google_play_services_version"
+            android:src="@drawable/rain" />
+        <ImageView
+            android:id="@+id/rain2"
+            android:layout_width="200dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center"
+            android:alpha="0"
+            android:rotation="@integer/google_play_services_version"
+            android:src="@drawable/rain" />
+        <ImageView
+            android:id="@+id/rain3"
+            android:layout_width="200dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center"
+            android:alpha="0"
+            android:rotation="@integer/google_play_services_version"
+            android:src="@drawable/rain" />
+        <ImageView
+            android:id="@+id/rain4"
+            android:layout_width="200dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center"
+            android:alpha="0"
+            android:rotation="@integer/google_play_services_version"
+            android:src="@drawable/rain" />
+
         <TextView
             android:id="@+id/region"
             android:layout_width="wrap_content"
@@ -75,7 +108,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            >
 
             <TextView
                 android:id="@+id/famous_saying"
