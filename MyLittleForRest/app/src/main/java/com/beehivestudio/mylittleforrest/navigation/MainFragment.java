@@ -136,7 +136,7 @@ public class MainFragment extends Fragment {
                     String weather = document.getString("weather");
                     //도시
                     String city = document.getString("city");
-                    region.setText("지역 : " + city + "\n온도 : " + temperature + "ºC\n습도 : " + humidity + "%\n기상 : " + weather);
+                    region.setText("지역 : " + city + "\n온도 : " + temperature + "℃\n습도 : " + humidity + "%\n기상 : " + weather);
                     if (weather.equals("Clouds")||weather.equals("Mist")) {
                         back.setBackgroundResource(R.drawable.clooudbackground);
                         Glide.with(getContext())
