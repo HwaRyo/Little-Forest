@@ -13,6 +13,7 @@ import android.widget.ImageView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.widget.LinearLayoutCompat
+import androidx.core.content.ContextCompat
 import androidx.core.graphics.BlendModeColorFilterCompat
 import androidx.core.graphics.BlendModeCompat
 import androidx.fragment.app.Fragment
@@ -25,6 +26,7 @@ import com.google.android.gms.tasks.Task
 
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ListenerRegistration
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.UploadTask
 import kotlinx.android.synthetic.main.activity_main.*
@@ -38,7 +40,9 @@ class UserFragment : Fragment() {
     var uid: String? = null
     var auth: FirebaseAuth? = null
     var currentUserUid: String? = null
-    var data_document : ArrayList<String> = arrayListOf()
+    var followingListenerRegistration: ListenerRegistration? = null
+    var followListenerRegistration: ListenerRegistration? = null
+    var data_document: ArrayList<String> = arrayListOf()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -87,7 +91,7 @@ class UserFragment : Fragment() {
             if (uid == currentUserUid) {
                 fragmentView?.account_recyclerview?.adapter =
                     UserFragmentRecyclerViewAdapter("private")
-            }else {
+            } else {
                 Toast.makeText(fragmentView?.context, "Private는 자신만 볼 수 있습니다!", Toast.LENGTH_SHORT)
                     .show()
                 fragmentView?.user_radio_group?.check(fragmentView?.user_rb_public?.id!!)
@@ -110,7 +114,18 @@ class UserFragment : Fragment() {
             launcher.launch(photoPickerIntent);
         }
         getProfileImage()
-        getFollowersAndFollowings()
+        getFollowing()
+        getFollower()
+
+
+        fragmentView?.book?.setOnClickListener {
+            if (uid == currentUserUid) {
+                startActivity(Intent(this.context, BookActivity::class.java))
+            } else {
+                Toast.makeText(this.context, "자신의 도감만 확인할 수 있습니다.", Toast.LENGTH_SHORT).show()
+            }
+        }
+
         return fragmentView
     }
 
@@ -134,25 +149,29 @@ class UserFragment : Fragment() {
         }
 
     fun requestFollow() {
-        //Save data to my account
-        var tsDocFollowing = firestore?.collection("users")?.document(currentUserUid!!)
+
+
+        var tsDocFollowing = firestore!!.collection("users").document(currentUserUid!!)
         firestore?.runTransaction { transaction ->
-            var followDTO = transaction.get(tsDocFollowing!!).toObject(FollowDTO::class.java)
+
+            var followDTO = transaction.get(tsDocFollowing).toObject(FollowDTO::class.java)
             if (followDTO == null) {
+
                 followDTO = FollowDTO()
-                followDTO!!.followingCount = 1
-                followDTO!!.followings[uid!!] = true
+                followDTO.followingCount = 1
+                followDTO.followings[uid!!] = true
 
                 transaction.set(tsDocFollowing, followDTO)
                 return@runTransaction
-            }
 
-            if (followDTO.followings.containsKey(uid)) {
-                //It remove following third person when a third person follow me
+            }
+            // Unstar the post and remove self from stars
+            if (followDTO?.followings?.containsKey(uid)!!) {
+
                 followDTO?.followingCount = followDTO?.followingCount - 1
-                followDTO?.followers?.remove(uid)
+                followDTO?.followings.remove(uid)
             } else {
-                //It add following third person when a third person do not follow me
+
                 followDTO?.followingCount = followDTO?.followingCount + 1
                 followDTO?.followings[uid!!] = true
             }
@@ -186,42 +205,47 @@ class UserFragment : Fragment() {
         }
     }
 
-    fun getFollowersAndFollowings() {
-        firestore?.collection("users")?.document(uid!!)?.addSnapshotListener { value, error ->
-            if (value == null) return@addSnapshotListener
-
-            var followDTO = value.toObject(FollowDTO::class.java)
-            if (followDTO?.followingCount != null) {
-                fragmentView?.account_tv_following_count?.text =
-                    followDTO?.followingCount?.toString()
+    fun getFollowing() {
+        followingListenerRegistration = firestore?.collection("users")?.document(uid!!)
+            ?.addSnapshotListener { documentSnapshot, firebaseFirestoreException ->
+                val followDTO = documentSnapshot?.toObject(FollowDTO::class.java)
+                if (followDTO == null) return@addSnapshotListener
+                fragmentView!!.account_tv_following_count.text =
+                    followDTO?.followingCount.toString()
             }
-            if (followDTO?.followerCount != null) {
-                fragmentView?.account_tv_follower_count?.text = followDTO?.followerCount?.toString()
-                if (followDTO?.followers?.containsKey(currentUserUid)) {
+    }
+
+
+    fun getFollower() {
+
+        followListenerRegistration = firestore?.collection("users")?.document(uid!!)
+            ?.addSnapshotListener { documentSnapshot, firebaseFirestoreException ->
+                val followDTO = documentSnapshot?.toObject(FollowDTO::class.java)
+                if (followDTO == null) return@addSnapshotListener
+                fragmentView?.account_tv_follower_count?.text = followDTO?.followerCount.toString()
+                if (followDTO?.followers?.containsKey(currentUserUid)!!) {
+
                     fragmentView?.account_btn_follow_signout?.text =
                         getString(R.string.follow_cancel)
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-                        fragmentView?.account_btn_follow_signout?.background?.colorFilter =
-                            BlendModeColorFilterCompat.createBlendModeColorFilterCompat(
-                                R.color.colorLightGray,
-                                BlendModeCompat.MULTIPLY
-                            )
-                    } else {
-                        @Suppress("DEPRECATION")
-                        fragmentView?.account_btn_follow_signout?.background?.setColorFilter(
-                            R.color.colorLightGray.toInt(),
-                            PorterDuff.Mode.MULTIPLY
+                    fragmentView?.account_btn_follow_signout
+                        ?.background
+                        ?.setColorFilter(
+                            ContextCompat.getColor(
+                                requireActivity(),
+                                R.color.colorLightGray
+                            ), PorterDuff.Mode.MULTIPLY
                         )
-                    }
                 } else {
+
                     if (uid != currentUserUid) {
-                        fragmentView?.account_btn_follow_signout?.text = getString(follow)
+
+                        fragmentView?.account_btn_follow_signout?.text = getString(R.string.follow)
                         fragmentView?.account_btn_follow_signout?.background?.colorFilter = null
                     }
-
                 }
+
             }
-        }
+
     }
 
     fun getProfileImage() {
@@ -277,7 +301,7 @@ class UserFragment : Fragment() {
             Glide.with(holder.itemView.context).load(contentDTOs[position].imageUrl)
                 .apply(RequestOptions().centerCrop()).into(imageview)
 
-            holder.itemView.setOnClickListener{
+            holder.itemView.setOnClickListener {
 
                 val nextIntent = Intent(fragmentView?.context, ContentDetailActivity::class.java)
                 nextIntent.putExtra("imageUrl", contentDTOs[position].imageUrl)
@@ -293,5 +317,11 @@ class UserFragment : Fragment() {
             return contentDTOs.size
         }
 
+    }
+
+    override fun onStop() {
+        super.onStop()
+        followListenerRegistration?.remove()
+        followingListenerRegistration?.remove()
     }
 }

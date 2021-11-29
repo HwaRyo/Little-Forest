@@ -45,8 +45,11 @@ public class PhoneLoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_phone_login);
 
+<<<<<<< HEAD
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
+=======
+>>>>>>> origin/main
         LinearLayout phone_get_lo = findViewById(R.id.phone_get_lo);
         EditText phone_gnumber_et = findViewById(R.id.phone_gnumber_et);
         Button phone_gnumber_btn = findViewById(R.id.phone_gnumber_btn);

@@ -1,5 +1,6 @@
 package com.beehivestudio.mylittleforrest;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -9,8 +10,11 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.text.SimpleDateFormat;
@@ -33,12 +37,15 @@ public class SeedActivity extends AppCompatActivity {
 
         EditText et_seed_name = findViewById(R.id.et_seed_name);
 
-        ImageButton seed1 = findViewById(R.id.seed1);
-        ImageButton seed2 = findViewById(R.id.seed2);
-        ImageButton seed3 = findViewById(R.id.seed3);
-        ImageButton seed4 = findViewById(R.id.seed4);
-        ImageButton seed5 = findViewById(R.id.seed5);
-        ImageButton seed6 = findViewById(R.id.seed6);
+        ImageButton rose = findViewById(R.id.rose);
+        ImageButton sunflower = findViewById(R.id.sunflower);
+        ImageButton rosemoss = findViewById(R.id.rosemoss);
+        ImageButton forsythia = findViewById(R.id.forsythia);
+        ImageButton tulip = findViewById(R.id.tulip);
+        ImageButton cosmos = findViewById(R.id.cosmos);
+        ImageButton valley = findViewById(R.id.valley);
+        ImageButton mugunghwa = findViewById(R.id.mugunghwa);
+        ImageButton morninggory = findViewById(R.id.morninggory);
 
         ImageButton.OnClickListener onClickListener = new ImageButton.OnClickListener() {
             @Override
@@ -47,44 +54,63 @@ public class SeedActivity extends AppCompatActivity {
                     Toast.makeText(SeedActivity.this, "공백이 있습니다!", Toast.LENGTH_SHORT).show();
                 } else {
                     switch (view.getId()) {
-                        case R.id.seed1:
-                            seed = "장미";
-                            seed_sand(seed, et_seed_name.getText().toString());
+                        case R.id.rose:
+                            seed = "rose";
+                            seed_sand(seed, et_seed_name.getText().toString(), 1);
                             break;
-                        case R.id.seed2:
-                            seed = "장미";
-                            seed_sand(seed, et_seed_name.getText().toString());
+                        case R.id.sunflower:
+                            seed = "sunflower";
+                            seed_sand(seed, et_seed_name.getText().toString(), 2);
                             break;
-                        case R.id.seed3:
-                            seed = "장미";
-                            seed_sand(seed, et_seed_name.getText().toString());
+                        case R.id.rosemoss:
+                            seed = "rosemoss";
+                            seed_sand(seed, et_seed_name.getText().toString(), 3);
                             break;
-                        case R.id.seed4:
-                            seed = "장미";
-                            seed_sand(seed, et_seed_name.getText().toString());
+                        default:
+                            Toast.makeText(SeedActivity.this, "업데이트를 기다려 주세요!", Toast.LENGTH_SHORT).show();
                             break;
-                        case R.id.seed5:
-                            seed = "장미";
-                            seed_sand(seed, et_seed_name.getText().toString());
-                            break;
-                        case R.id.seed6:
-                            seed = "장미";
-                            seed_sand(seed, et_seed_name.getText().toString());
-                            break;
+
+//                        case R.id.forsythia:
+//                            seed = "forsythia";
+//                            seed_sand(seed, et_seed_name.getText().toString(), 4);
+//                            break;
+//                        case R.id.tulip:
+//                            seed = "tulip";
+//                            seed_sand(seed, et_seed_name.getText().toString(), 5);
+//                            break;
+//                        case R.id.cosmos:
+//                            seed = "cosmos";
+//                            seed_sand(seed, et_seed_name.getText().toString(), 6);
+//                            break;
+//                        case R.id.valley:
+//                            seed = "valley";
+//                            seed_sand(seed, et_seed_name.getText().toString(), 7);
+//                            break;
+//                        case R.id.mugunghwa:
+//                            seed = "mugunghwa";
+//                            seed_sand(seed, et_seed_name.getText().toString(), 8);
+//                            break;
+//                        case R.id.morninggory:
+//                            seed = "morninggory";
+//                            seed_sand(seed, et_seed_name.getText().toString(), 9);
+//                            break;
                     }
                 }
             }
         };
-        seed1.setOnClickListener(onClickListener);
-        seed2.setOnClickListener(onClickListener);
-        seed3.setOnClickListener(onClickListener);
-        seed4.setOnClickListener(onClickListener);
-        seed5.setOnClickListener(onClickListener);
-        seed6.setOnClickListener(onClickListener);
+        rose.setOnClickListener(onClickListener);
+        rosemoss.setOnClickListener(onClickListener);
+        sunflower.setOnClickListener(onClickListener);
+        morninggory.setOnClickListener(onClickListener);
+        mugunghwa.setOnClickListener(onClickListener);
+        forsythia.setOnClickListener(onClickListener);
+        valley.setOnClickListener(onClickListener);
+        tulip.setOnClickListener(onClickListener);
+        cosmos.setOnClickListener(onClickListener);
 
     }
 
-    private void seed_sand(String species, String name) {
+    private void seed_sand(String species, String name, int num) {
         String pattern = "yyyyMMdd";
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
         String date = simpleDateFormat.format(new Date());
@@ -96,6 +122,33 @@ public class SeedActivity extends AppCompatActivity {
         user.put("exp", "0");
 
         db.collection("Seed").document(uid).set(user);
+
+
+        Map<String, Object> seed_book = new HashMap<>();
+        db.collection("Book").document(uid).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    String temp;
+                    //i로 갯수 수정
+                    for (int i = 1; i < 4; i++) {
+                        temp = "seed" + i;
+                        if (i == num) {
+                            seed_book.put(temp, true);
+                        } else {
+                            if (document.getBoolean(temp) == null) {
+                                seed_book.put(temp, false);
+                            } else {
+                                seed_book.put(temp, document.getBoolean(temp));
+                            }
+                        }
+                    }
+                }
+                db.collection("Book").document(uid).set(seed_book);
+            }
+        });
+
 
         Intent intent = new Intent(SeedActivity.this, MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);

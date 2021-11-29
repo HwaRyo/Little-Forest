@@ -20,6 +20,7 @@ import com.squareup.okhttp.OkHttpClient
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.item_detail.view.*
 import kotlinx.android.synthetic.main.fragment_detail.view.*
+import kotlinx.android.synthetic.main.fragment_user.*
 
 import java.util.*
 
@@ -70,7 +71,7 @@ class DetailViewFragment : Fragment() {
             var uid = FirebaseAuth.getInstance().currentUser?.uid
             firestore?.collection("users")?.document(uid!!)?.get()?.addOnCompleteListener { task ->
                 if (task.isSuccessful) {
-                    var userDTO = task.result?.toObject(FollowDTO::class.java)
+                    var userDTO = task.result!!.toObject(FollowDTO::class.java)
                     if (userDTO?.followings != null) {
                         getCotents(userDTO?.followings)
                     }
