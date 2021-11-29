@@ -18,10 +18,11 @@ import java.util.*
 
 
 class AddPhotoActivity : AppCompatActivity() {
-    var storage : FirebaseStorage ?= null
-    var photoUri : Uri? = null
-    var auth : FirebaseAuth? = null
-    var firestore : FirebaseFirestore? = null
+    var storage: FirebaseStorage? = null
+    var photoUri: Uri? = null
+    var auth: FirebaseAuth? = null
+    var firestore: FirebaseFirestore? = null
+    var count = 0;
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,7 +33,7 @@ class AddPhotoActivity : AppCompatActivity() {
         auth = FirebaseAuth.getInstance()
         firestore = FirebaseFirestore.getInstance()
 
-        addphoto_image.setOnClickListener{
+        addphoto_image.setOnClickListener {
             var photoPickerIntent = Intent(Intent.ACTION_PICK)
             photoPickerIntent.type = "image/*"
             launcher.launch(photoPickerIntent);
@@ -40,28 +41,32 @@ class AddPhotoActivity : AppCompatActivity() {
 
 
         addphoto_btn_upload.setOnClickListener {
-            if(rb_public.isChecked) {
-                contentUpload("images")
-            }else if (rb_private.isChecked){
-                contentUpload("private")
-           }else{
-                Toast.makeText(this,"게시 방법을 선택해주세요!",Toast.LENGTH_SHORT).show()
+            if (count != 0) {
+                if (rb_public.isChecked) {
+                    contentUpload("images")
+                } else if (rb_private.isChecked) {
+                    contentUpload("private")
+                } else {
+                    Toast.makeText(this, "게시 방법을 선택해주세요!", Toast.LENGTH_SHORT).show()
+                }
+            }else if(count == 0){
+                Toast.makeText(this, "이미지를 올려주세요!", Toast.LENGTH_SHORT).show()
             }
         }
     }
 
-    val launcher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
-            result ->
-        if (result.resultCode == Activity.RESULT_OK) {
-            //This is path to the selected image
-            photoUri = result.data?.data
-            addphoto_image.setImageURI(photoUri)
-
-        } else {
-            // Exit the addPhotoActivity if you leave the album without selecting it
-            finish()
+    val launcher =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                //This is path to the selected image
+                photoUri = result.data?.data
+                addphoto_image.setImageURI(photoUri)
+                count++;
+            }
+//        else {
+//            finish()
+//        }
         }
-    }
 
     fun contentUpload(division: String) {
         //Make filename
@@ -73,7 +78,7 @@ class AddPhotoActivity : AppCompatActivity() {
 
         // 두 가지 방식 중 가독성이 좋은 것 택
         //Promise method -> 더 보편적
-        storageRef?.putFile(photoUri!!)?.continueWithTask { task: Task<UploadTask.TaskSnapshot>->
+        storageRef?.putFile(photoUri!!)?.continueWithTask { task: Task<UploadTask.TaskSnapshot> ->
             return@continueWithTask storageRef.downloadUrl
         }?.addOnSuccessListener { uri ->
             var contentDTO = ContentDTO()
