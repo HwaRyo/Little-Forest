@@ -43,7 +43,7 @@ public class LodingActivity extends AppCompatActivity {
     String uid = user.getUid();
     private final static String appKey = "9c8c143b1bb0efd33f5f41282b0b5075";
     LocationManager lm;
-    phpDown task;
+    apiDown task;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,34 +56,19 @@ public class LodingActivity extends AppCompatActivity {
         } else {
             Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
 
-            lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 1, gpsLocationListener);
-            lm.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 1000, 1, gpsLocationListener);
+            lm.requestSingleUpdate(LocationManager.GPS_PROVIDER, new LocationListener() {
+                @Override
+                public void onLocationChanged(@NonNull Location location) {
+                    double longitude = location.getLongitude();
+                    double latitude = location.getLatitude();
+                    task = new apiDown();
+                    task.execute("https://api.openweathermap.org/data/2.5/weather?lat=" + latitude + "&lon=" + longitude + "&appid=" + appKey);
+                }
+            }, null);
         }
     }
 
-    final LocationListener gpsLocationListener = new LocationListener() {
-        public void onLocationChanged(Location location) {
-            String provider = location.getProvider();
-            double longitude = location.getLongitude();
-            double latitude = location.getLatitude();
-            double altitude = location.getAltitude();
-
-            task = new phpDown();
-
-            task.execute("https://api.openweathermap.org/data/2.5/weather?lat=" + latitude + "&lon=" + longitude + "&appid=" + appKey);
-        }
-
-        public void onStatusChanged(String provider, int status, Bundle extras) {
-        }
-
-        public void onProviderEnabled(String provider) {
-        }
-
-        public void onProviderDisabled(String provider) {
-        }
-    };
-
-    private class phpDown extends AsyncTask<String, Integer, String> {
+    private class apiDown extends AsyncTask<String, Integer, String> {
         @Override
         protected String doInBackground(String... urls) {
             StringBuilder jsonHtml = new StringBuilder();
@@ -142,7 +127,7 @@ public class LodingActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                         if (task.isSuccessful()) {
                             DocumentSnapshot document = task.getResult();
-                            if (document.getData()!=null) {
+                            if (document.getData() != null) {
                                 Intent intent = new Intent(LodingActivity.this, MainActivity.class);
                                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                 LodingActivity.this.startActivity(intent);
