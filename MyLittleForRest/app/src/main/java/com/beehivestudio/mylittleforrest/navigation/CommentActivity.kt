@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toolbar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -19,6 +20,8 @@ import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ListenerRegistration
 import kotlinx.android.synthetic.main.activity_comment.*
+import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.fragment_user.view.*
 import kotlinx.android.synthetic.main.item_comment.view.*
 
 class CommentActivity : AppCompatActivity() {
@@ -52,19 +55,17 @@ class CommentActivity : AppCompatActivity() {
                 .collection("comments")
                 .document()
                 .set(comment)
-
         }
 
-
-
+        comment_toolbar_btn_back.setOnClickListener {
+            onBackPressed()
+        }
     }
 
     override fun onStop() {
         super.onStop()
         commentSnapshot?.remove()
     }
-
-
 
 
     inner class CommentRecyclerViewAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {

@@ -3,7 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bookbackground"
     android:orientation="vertical"
     android:scaleType="fitCenter"
     tools:context="book.BookFragment1">
@@ -12,6 +11,7 @@
         android:id="@+id/book"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@drawable/bookbackground"
         android:scaleType="fitCenter"/>
 
 </LinearLayout>

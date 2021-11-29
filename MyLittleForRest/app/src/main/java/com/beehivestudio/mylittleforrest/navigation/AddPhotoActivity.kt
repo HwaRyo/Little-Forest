@@ -53,6 +53,10 @@ class AddPhotoActivity : AppCompatActivity() {
                 Toast.makeText(this, "이미지를 올려주세요!", Toast.LENGTH_SHORT).show()
             }
         }
+
+        addphoto_toolbar_btn_back.setOnClickListener{
+            onBackPressed()
+        }
     }
 
     val launcher =

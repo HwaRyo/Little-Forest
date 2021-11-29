@@ -21,7 +21,6 @@ import kotlinx.android.synthetic.main.item_detail.view.*
 
 class ContentDetailActivity : AppCompatActivity() {
 
-
     var user: FirebaseUser? = null
     var content_commentSnapshot: ListenerRegistration? = null
     var firestore: FirebaseFirestore? = null
@@ -55,6 +54,10 @@ class ContentDetailActivity : AppCompatActivity() {
                 .document()
                 .set(comment)
 
+        }
+
+        content_toolbar_btn_back.setOnClickListener {
+            onBackPressed()
         }
 
     }

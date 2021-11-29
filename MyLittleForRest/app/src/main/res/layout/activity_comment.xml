@@ -7,27 +7,54 @@
 
     <!-- Toolbar -->
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/my_toolbar"
+        android:id="@+id/comment_my_toolbar"
         android:layout_width="match_parent"
         android:layout_height="35dp"
-        android:layout_alignParentTop="true"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-        app:contentInsetStart="0dp"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+        android:layout_alignParentTop="true">
 
-        <ImageView
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="3dp"
-            android:contentDescription="@string/app_name" />
+            android:layout_height="match_parent">
 
+            <ImageView
+                android:id="@+id/comment_toolbar_title_image"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:layout_marginStart="3dp"
+                android:layout_marginTop="3dp"
+                android:layout_marginEnd="3dp"
+                android:layout_marginBottom="3dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/logo2" />
+
+            <ImageView
+                android:id="@+id/comment_toolbar_btn_back"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="22dp"
+                android:src="@drawable/ic_arrow_back" />
+
+            <TextView
+                android:id="@+id/comment_toolbar_username"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/comment_toolbar_btn_back"
+                android:gravity="center"
+                android:textColor="@color/colorNavIcon"
+                android:textSize="16sp"
+                android:visibility="gone" />
+        </RelativeLayout>
     </androidx.appcompat.widget.Toolbar>
 
     <LinearLayout
         android:id="@+id/toolbar_division"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_below="@id/my_toolbar"
+        android:layout_below="@id/comment_my_toolbar"
         android:background="@color/colorDivision"
         android:orientation="horizontal" />
 
@@ -38,8 +65,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/toolbar_division"
-        android:layout_marginBottom="30dp"
-        android:layout_marginTop="8dp" />
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="30dp" />
 
     <Button
         android:id="@+id/comment_btn_send"
