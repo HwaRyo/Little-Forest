@@ -12,21 +12,17 @@
         android:layout_centerInParent="true"
         android:visibility="gone" />
 
-    <!-- Toolbar -->
-    <androidx.appcompat.widget.Toolbar
+    <LinearLayout
         android:id="@+id/my_toolbar"
         android:layout_width="match_parent"
-        android:layout_height="35dp"
-        android:layout_alignParentTop="true"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
-
+        android:layout_height="35dp">
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="3dp"
-            android:contentDescription="@string/app_name" />
-
-    </androidx.appcompat.widget.Toolbar>
+            android:scaleType="fitCenter"
+            android:src="@drawable/logo2"/>
+    </LinearLayout>
+    <!-- Toolbar -->
 
     <LinearLayout
         android:id="@+id/toolbar_division"

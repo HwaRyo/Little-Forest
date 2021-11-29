@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#99B4E3"
+    android:background="@drawable/bookbackground"
     android:orientation="vertical"
     android:scaleType="fitCenter"
     tools:context="book.BookFragment1">

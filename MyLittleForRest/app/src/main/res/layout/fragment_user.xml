@@ -132,7 +132,7 @@
         android:id="@+id/book"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:background="@drawable/ic_add_a_photo"
+        android:background="@drawable/book"
         android:scaleType="fitCenter"
         android:layout_gravity="right"/>
     </FrameLayout>
