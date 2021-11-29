@@ -32,6 +32,7 @@ import android.widget.Toast;
 
 import com.beehivestudio.mylittleforrest.AddPhotoActivity;
 import com.beehivestudio.mylittleforrest.MainActivity;
+import com.beehivestudio.mylittleforrest.PopupActivity;
 import com.beehivestudio.mylittleforrest.R;
 import com.beehivestudio.mylittleforrest.SeedActivity;
 import com.bumptech.glide.Glide;
@@ -247,15 +248,10 @@ public class MainFragment extends Fragment {
                         Glide.with(root.getContext())
                                 .load(R.drawable.death)
                                 .into(iv_plant);
-                        iv_plant.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                Toast.makeText(root.getContext(), "꽃이 시들었습니다. 다시키워주세요.", Toast.LENGTH_SHORT).show();
 
-                                Intent intent = new Intent(root.getContext(), SeedActivity.class);
-                                startActivity(intent);
-                            }
-                        });
+                        Intent test = new Intent(root.getContext(), PopupActivity.class);
+                        startActivity(test);
+
                     }
                 } else {/*파베에서 데이터 가져오기 실패할때*/}
             }
@@ -270,9 +266,10 @@ public class MainFragment extends Fragment {
                     Intent intent = new Intent(root.getContext(), SeedActivity.class);
                     startActivity(intent);
                 }
-                //죽은식물일때 if 만들기
             }
         });
+
+
 
         upload.setOnClickListener(new View.OnClickListener() {
             @Override
