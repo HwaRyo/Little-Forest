@@ -121,8 +121,6 @@ public class LodingActivity extends AppCompatActivity {
                 //도시
                 String city = jsonObject.getString("name");
 
-                String convert_city = new String(city.getBytes("8859_1"), "utf-8");
-
                 Double lon = jsonObject.getJSONObject("coord").getDouble("lon");
                 Double lat = jsonObject.getJSONObject("coord").getDouble("lat");
 
@@ -148,8 +146,10 @@ public class LodingActivity extends AppCompatActivity {
                     String tmp2 = String.valueOf(arr[2].charAt(arr[2].length()-1));
                     if(tmp1.equals("시")) {
                         gps.put("city", arr[1]);
-                    }else if (tmp2.equals("시")){
+                    }else if (tmp2.equals("시")) {
                         gps.put("city", arr[2]);
+                    }else{
+                        gps.put("city", city);
                     }
                 }
 
