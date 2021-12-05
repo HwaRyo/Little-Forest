@@ -77,8 +77,6 @@ public class BookActivity extends AppCompatActivity {
         @NonNull
         @Override
         public Fragment createFragment(int position) {
-
-
             if (position == 0) return new BookFragment();
             else if (position == 1) return new BookFragment1();
             else if (position == 2) return new BookFragment2();

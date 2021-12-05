@@ -306,7 +306,7 @@ public class MissionFragment extends Fragment {
                             if (task.isSuccessful()) {
                                 DocumentSnapshot document = task.getResult();
                                 Glide.with(root.getContext())
-                                        .load(R.drawable.cosmos)
+                                        .load(R.drawable.rosemoss)
                                         .into(mission_21_image);
                                 user.put("date", date);
                                 current_exp[0] = Integer.parseInt(document.getString("exp"));

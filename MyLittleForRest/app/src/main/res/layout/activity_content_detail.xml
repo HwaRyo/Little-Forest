@@ -34,7 +34,7 @@
                 android:layout_marginEnd="3dp"
                 android:layout_marginBottom="3dp"
                 android:scaleType="fitCenter"
-                android:src="@drawable/logo2" />
+                android:src="@drawable/wordlogo2" />
 
             <ImageView
                 android:id="@+id/content_toolbar_btn_back"
@@ -52,9 +52,19 @@
                 android:layout_centerVertical="true"
                 android:layout_toRightOf="@id/content_toolbar_btn_back"
                 android:gravity="center"
-                android:textColor="@color/colorNavIcon"
+                android:textColor="@color/black"
                 android:textSize="16sp"
                 android:visibility="gone" />
+
+            <ImageView
+                android:id="@+id/content_toolbar_btn_delete"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:scaleType="fitCenter"
+                android:layout_marginRight="22dp"
+                android:src="@android:drawable/btn_dialog" />
         </RelativeLayout>
     </androidx.appcompat.widget.Toolbar>
 
@@ -109,7 +119,7 @@
 
                     android:layout_weight="8"
                     android:layout_margin="10dp"
-                    android:layout_toLeftOf="@id/comment_btn_send" />
+                    android:layout_toLeftOf="@id/content_comment_btn_send" />
 
 
                 <Button

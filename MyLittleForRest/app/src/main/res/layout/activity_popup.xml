@@ -11,6 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <TextView
+            android:id="@+id/head"
             android:text="꽃이 시들었어요ㅠㅠ"
             android:textSize="20sp"
             android:textColor="#fff"

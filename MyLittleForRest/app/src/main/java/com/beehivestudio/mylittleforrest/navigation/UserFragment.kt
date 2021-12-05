@@ -316,6 +316,11 @@ class UserFragment : Fragment() {
                 nextIntent.putExtra("favoriteCount", contentDTOs[position].favoriteCount)
                 nextIntent.putExtra("contentUid", data_document.get(position))
                 nextIntent.putExtra("destinationUid", contentDTOs[position].uid)
+                if(fragmentView?.user_rb_public?.isChecked==true){
+                    nextIntent.putExtra("selectOption", "images")
+                }else{
+                    nextIntent.putExtra("selectOption", "private")
+                }
                 startActivity(nextIntent)
             }
         }

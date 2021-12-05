@@ -8,7 +8,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@id/signin_layout"
-        android:gravity="center">
+        android:gravity="center"
+        android:orientation="vertical">
+
 
         <ImageView
             android:id="@+id/image_logo"
@@ -21,6 +23,10 @@
             android:layout_marginBottom="50dp"
             android:contentDescription="@string/app_name"
             android:src="@drawable/applogo" />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="70dp"
+            android:src="@drawable/wordlogo2"/>
     </LinearLayout>
     <ProgressBar
         android:id="@+id/progress_bar"

@@ -209,9 +209,9 @@ public class MainFragment extends Fragment {
                                 Glide.with(root.getContext())
                                         .load(R.drawable.sunflower)
                                         .into(iv_plant);
-                            else if (species.equals("rosemoss"))
+                            else if (species.equals("cosmos"))
                                 Glide.with(root.getContext())
-                                        .load(R.drawable.rosemoss)
+                                        .load(R.drawable.cosmos)
                                         .into(iv_plant);
                             //업데이트용
 //                            else if (species.equals("forsythia"))
@@ -249,8 +249,9 @@ public class MainFragment extends Fragment {
                                 .load(R.drawable.death)
                                 .into(iv_plant);
 
-                        Intent test = new Intent(root.getContext(), PopupActivity.class);
-                        startActivity(test);
+                        Intent popup = new Intent(root.getContext(), PopupActivity.class);
+                        popup.putExtra("menu","main");
+                        startActivity(popup);
 
                     }
                 } else {/*파베에서 데이터 가져오기 실패할때*/}

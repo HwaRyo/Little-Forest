@@ -3,16 +3,39 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#99E3E3"
     android:orientation="vertical"
-    android:scaleType="fitCenter"
     tools:context="book.BookFragment2">
 
-
-    <ImageView
-        android:id="@+id/book2"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scaleType="fitCenter"/>
+        android:layout_height="match_parent">
+        <ImageView
+            android:id="@+id/book2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="fitCenter"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="2"/>
+            <TextView
+                android:id="@+id/txtbook2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="bottom"
+                android:paddingLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_weight="3"
+                android:textSize="22sp"/>
+        </LinearLayout>
+
+    </FrameLayout>
+
 
 </LinearLayout>

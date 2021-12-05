@@ -62,8 +62,8 @@ public class SeedActivity extends AppCompatActivity {
                             seed = "sunflower";
                             seed_sand(seed, et_seed_name.getText().toString(), 2);
                             break;
-                        case R.id.rosemoss:
-                            seed = "rosemoss";
+                        case R.id.cosmos:
+                            seed = "cosmos";
                             seed_sand(seed, et_seed_name.getText().toString(), 3);
                             break;
                         default:
@@ -78,8 +78,8 @@ public class SeedActivity extends AppCompatActivity {
 //                            seed = "tulip";
 //                            seed_sand(seed, et_seed_name.getText().toString(), 5);
 //                            break;
-//                        case R.id.cosmos:
-//                            seed = "cosmos";
+//                        case R.id.rosemoss:
+//                            seed = "rosemoss";
 //                            seed_sand(seed, et_seed_name.getText().toString(), 6);
 //                            break;
 //                        case R.id.valley:

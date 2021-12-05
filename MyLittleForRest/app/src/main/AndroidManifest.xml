@@ -35,7 +35,6 @@
             </intent-filter>
         </activity>
         <activity android:name=".AddPhotoActivity" />
-        <activity android:name=".CommentActivity" />
     </application>
 
 </manifest>

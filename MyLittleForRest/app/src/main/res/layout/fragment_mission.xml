@@ -88,6 +88,7 @@
                             android:layout_weight="4"
                             android:adjustViewBounds="true"
                             android:gravity="center"
+                            android:button="@android:color/transparent"
                             android:textSize="15sp" />
                     </LinearLayout>
 
@@ -120,6 +121,7 @@
                             android:layout_weight="4"
                             android:adjustViewBounds="true"
                             android:gravity="center"
+                            android:button="@android:color/transparent"
                             android:textSize="15sp" />
                     </LinearLayout>
                 </LinearLayout>
@@ -174,6 +176,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="4"
                             android:adjustViewBounds="true"
+                            android:button="@android:color/transparent"
                             android:gravity="center"
                             android:textSize="15sp" />
                     </LinearLayout>
@@ -205,6 +208,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="4"
+                            android:button="@android:color/transparent"
                             android:adjustViewBounds="true"
                             android:gravity="center" />
                     </LinearLayout>
@@ -260,6 +264,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="4"
                             android:adjustViewBounds="true"
+                            android:button="@android:color/transparent"
                             android:gravity="center"
                             android:textSize="15sp" />
                     </LinearLayout>
@@ -289,6 +294,7 @@
                         <CheckBox
                             android:id="@+id/mission_32_text"
                             android:layout_width="match_parent"
+                            android:button="@android:color/transparent"
                             android:layout_height="wrap_content"
                             android:layout_weight="4"
                             android:adjustViewBounds="true"
