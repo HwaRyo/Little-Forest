@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -60,6 +61,7 @@ class EmailLoginActivity : AppCompatActivity() {
         auth = FirebaseAuth.getInstance()
         email_login_button.setOnClickListener{ emailLogin() }
         phone_sign_in_button.setOnClickListener { startActivity(Intent(this, PhoneLoginActivity::class.java)) }
+        register_button.setOnClickListener { startActivity(Intent(this, RegisterActivity::class.java)) }
     }
 
 
@@ -74,38 +76,6 @@ class EmailLoginActivity : AppCompatActivity() {
     }
 
 
-    //이메일 회원가입 및 로그인 메소드
-    fun createAndLoginEmail() {
-
-        auth?.createUserWithEmailAndPassword(
-            email_edittext.text.toString(),
-            password_edittext.text.toString()
-        )
-            ?.addOnCompleteListener { task ->
-                progress_bar.visibility = View.GONE
-                if (task.isSuccessful) {
-                    //아이디 생성이 성공했을 경우
-                    Toast.makeText(
-                        this,
-                        getString(R.string.signup_complete), Toast.LENGTH_SHORT
-                    ).show()
-
-                    //다음페이지 호출
-                    moveMainPage(auth?.currentUser)
-                } else if (task.exception?.message.isNullOrEmpty()) {
-                    //회원가입 에러가 발생했을 경우
-                    Toast.makeText(
-                        this,
-                        task.exception!!.message, Toast.LENGTH_SHORT
-                    ).show()
-                } else {
-                    //아이디 생성도 안되고 에러도 발생되지 않았을 경우 로그인
-                    signinEmail()
-                }
-            }
-
-    }
-
     fun emailLogin() {
 
         if (email_edittext.text.toString().isNullOrEmpty() || password_edittext.text.toString()
@@ -114,26 +84,26 @@ class EmailLoginActivity : AppCompatActivity() {
             Toast.makeText(this, getString(R.string.signout_fail_null), Toast.LENGTH_SHORT).show()
 
         } else {
-
             progress_bar.visibility = View.VISIBLE
-            createAndLoginEmail()
-
+            signinEmail()
         }
     }
 
     //로그인 메소드
     fun signinEmail() {
-
         auth?.signInWithEmailAndPassword(
             email_edittext.text.toString(),
             password_edittext.text.toString()
         )
             ?.addOnCompleteListener { task ->
                 progress_bar.visibility = View.GONE
-
                 if (task.isSuccessful) {
-                    //로그인 성공 및 다음페이지 호출
-                    moveMainPage(auth?.currentUser)
+                    Log.d("test", auth?.currentUser!!.isEmailVerified.toString())
+                    if (!auth?.currentUser!!.isEmailVerified){
+                        Toast.makeText(this, "메일 확인 후 사용해주세요.", Toast.LENGTH_SHORT).show()
+                    }else {
+                        moveMainPage(auth?.currentUser)
+                    }
                 } else {
                     //로그인 실패
                     Toast.makeText(this, task.exception!!.message, Toast.LENGTH_SHORT).show()
@@ -142,13 +112,13 @@ class EmailLoginActivity : AppCompatActivity() {
 
     }
 
-    override fun onStart() {
-        super.onStart()
-
-        //자동 로그인 설정
-        moveMainPage(auth?.currentUser)
-
-    }
+//    override fun onStart() {
+//        super.onStart()
+//
+//        //자동 로그인 설정
+//        moveMainPage(auth?.currentUser)
+//
+//    }
 
     override fun onRequestPermissionsResult(
         requestCode: Int,
