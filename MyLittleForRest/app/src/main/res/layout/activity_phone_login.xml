@@ -99,7 +99,7 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="10dp"
                 android:background="@color/white"
-                android:hint="+82xxxxxxxxxxx"
+                android:hint="xxxxxx"
                 android:inputType="phone"
                 android:textAlignment="center"
                 android:textColor="#000"
@@ -110,12 +110,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="5dp"
-<<<<<<< HEAD
                 android:layout_gravity="center_horizontal"
                 android:textAlignment="center"
-=======
                 android:gravity="center"
->>>>>>> origin/main
                 android:text="재전송이 필요하신가요?"
                 android:textColor="#777777" />
 
@@ -127,8 +124,4 @@
                 android:text="인증하기" />
         </LinearLayout>
     </LinearLayout>
-<<<<<<< HEAD
-</androidx.constraintlayout.widget.ConstraintLayout>
-=======
 </LinearLayout>
->>>>>>> origin/main

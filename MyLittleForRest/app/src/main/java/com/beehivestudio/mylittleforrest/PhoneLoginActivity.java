@@ -1,7 +1,9 @@
 package com.beehivestudio.mylittleforrest;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -41,15 +43,9 @@ public class PhoneLoginActivity extends AppCompatActivity {
     private ProgressDialog pd;
 
     protected void onCreate(Bundle savedInstanceState){
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_phone_login);
 
-<<<<<<< HEAD
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-
-=======
->>>>>>> origin/main
         LinearLayout phone_get_lo = findViewById(R.id.phone_get_lo);
         EditText phone_gnumber_et = findViewById(R.id.phone_gnumber_et);
         Button phone_gnumber_btn = findViewById(R.id.phone_gnumber_btn);
@@ -59,8 +55,13 @@ public class PhoneLoginActivity extends AppCompatActivity {
         TextView phone_resnumber_tv = findViewById(R.id.phone_resnumber_tv);
         TextView phone_snumber_text = findViewById(R.id.phone_snumber_text);
 
+        firebaseAuth = FirebaseAuth.getInstance();
+
+        phone_set_lo.setVisibility(View.GONE);
+        phone_get_lo.setVisibility(View.VISIBLE);
+
         pd = new ProgressDialog(this);
-        pd.setTitle("Please Wait...");
+        pd.setTitle("잠시만 기다려주세요...");
         pd.setCanceledOnTouchOutside(false);
 
         mCallback = new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
@@ -84,8 +85,8 @@ public class PhoneLoginActivity extends AppCompatActivity {
                 forceResendingToken = token;
                 pd.dismiss();
 
-                phone_set_lo.setVisibility(View.GONE);
-                phone_get_lo.setVisibility(View.VISIBLE);
+                phone_get_lo.setVisibility(View.GONE);
+                phone_set_lo.setVisibility(View.VISIBLE);
 
                 Toast.makeText(PhoneLoginActivity.this, "인증코드 전송중", Toast.LENGTH_SHORT).show();
 
@@ -93,7 +94,7 @@ public class PhoneLoginActivity extends AppCompatActivity {
             }
         };
 
-        phone_snumber_btn.setOnClickListener(new View.OnClickListener() {
+        phone_gnumber_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String phone = phone_gnumber_et.getText().toString().trim();
@@ -105,7 +106,7 @@ public class PhoneLoginActivity extends AppCompatActivity {
             }
         });
 
-        phone_resnumber_tv.setOnClickListener((new View.OnClickListener() {
+        phone_resnumber_tv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String phone = phone_gnumber_et.getText().toString().trim();
@@ -115,9 +116,9 @@ public class PhoneLoginActivity extends AppCompatActivity {
                     resendPhoneNumberVerification(phone, forceResendingToken);
                 }
             }
-        }));
+        });
 
-        phone_gnumber_btn.setOnClickListener(new View.OnClickListener() {
+        phone_snumber_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String code = phone_snumber_btn.getText().toString().trim();
@@ -134,6 +135,7 @@ public class PhoneLoginActivity extends AppCompatActivity {
         pd.setMessage("전화번호 확인중...");
         pd.show();
 
+
         PhoneAuthOptions options =
                 PhoneAuthOptions.newBuilder(firebaseAuth)
                         .setPhoneNumber(phone)
@@ -141,7 +143,6 @@ public class PhoneLoginActivity extends AppCompatActivity {
                         .setActivity(this)
                         .setCallbacks(mCallback)
                         .build();
-
         PhoneAuthProvider.verifyPhoneNumber(options);
     }
 
@@ -151,7 +152,7 @@ public class PhoneLoginActivity extends AppCompatActivity {
 
         PhoneAuthOptions options =
                 PhoneAuthOptions.newBuilder(firebaseAuth)
-                        .setPhoneNumber(phone)
+                        .setPhoneNumber("+821039406993")
                         .setTimeout(60L, TimeUnit.SECONDS)
                         .setActivity(this)
                         .setCallbacks(mCallback)
@@ -181,6 +182,7 @@ public class PhoneLoginActivity extends AppCompatActivity {
                         String phone = firebaseAuth.getCurrentUser().getPhoneNumber();
                         Toast.makeText(PhoneLoginActivity.this, "접속중...", Toast.LENGTH_SHORT).show();
 
+                        startActivity(new Intent(PhoneLoginActivity.this, MainActivity.class));
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {

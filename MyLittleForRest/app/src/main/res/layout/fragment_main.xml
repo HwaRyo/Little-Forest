@@ -113,14 +113,6 @@
                 android:adjustViewBounds="true"
                 android:background="@drawable/speech_bubble"
                 android:gravity="center"
-<<<<<<< HEAD
-                android:text="명언"
-                android:textSize="25sp"
-                android:background="@drawable/btn_signin_google"/>
-            <ImageButton
-                android:id="@+id/ib_plant"
-                android:layout_width="300dp"
-=======
                 android:padding="10dp"
                 android:scaleType="fitXY"
                 android:textSize="15sp" />
@@ -128,7 +120,6 @@
             <ImageView
                 android:id="@+id/iv_plant"
                 android:layout_width="match_parent"
->>>>>>> origin/main
                 android:layout_height="300dp"
                 android:adjustViewBounds="true"
                 android:scaleType="fitCenter" />

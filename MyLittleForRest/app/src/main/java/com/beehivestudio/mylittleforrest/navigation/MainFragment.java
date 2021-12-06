@@ -33,12 +33,8 @@ import android.widget.Toast;
 import com.beehivestudio.mylittleforrest.AddPhotoActivity;
 import com.beehivestudio.mylittleforrest.MainActivity;
 import com.beehivestudio.mylittleforrest.R;
-<<<<<<< HEAD
-//import com.beehivestudio.mylittleforrest.SeedActivity;
-=======
 import com.beehivestudio.mylittleforrest.SeedActivity;
 import com.bumptech.glide.Glide;
->>>>>>> origin/main
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -46,14 +42,6 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-<<<<<<< HEAD
-import org.jetbrains.annotations.NotNull;
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
-=======
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
@@ -63,12 +51,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Date;
->>>>>>> origin/main
 import java.util.Random;
-
-import retrofit2.Call;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 
 public class MainFragment extends Fragment {
@@ -202,42 +185,11 @@ public class MainFragment extends Fragment {
         });
 
 
-
-        Random rand = new Random();
-        int saying_num = rand.nextInt(10) + 1;
-
-
-        db.collection("saying").document(String.valueOf(saying_num)).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+        db.collection("Seed").document(uid).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 if (task.isSuccessful()) {
                     DocumentSnapshot document = task.getResult();
-<<<<<<< HEAD
-                    famous_saying.setText(document.getString("content"));
-                }
-            }
-        });
-
-
-        db.collection("Seed").document(uid).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                        if (task.isSuccessful()) {
-                            DocumentSnapshot document = task.getResult();
-                            int attendance = Integer.parseInt(document.getString("date"));
-                            plant_name.setText(document.getString("name"));
-                            exp.setProgress(Integer.parseInt(document.getString("exp")));
-                            if (attendance - current_date <= 3) {
-                                //식물생존 식물이름에 맞는 사진 넣는 명령어
-                            } else {
-                                //식물죽음 죽음에 맞는 사진 넣는 명령어
-                            }
-                        } else {/*파베에서 데이터 가져오기 실패할때*/}
-                    }
-                });
-
-        ib_plant.setOnClickListener(new View.OnClickListener() {
-=======
                     int attendance = Integer.parseInt(document.getString("date"));
                     plant_name.setText(document.getString("name"));
                     exp.setProgress(Integer.parseInt(document.getString("exp")));
@@ -306,7 +258,6 @@ public class MainFragment extends Fragment {
         });
 
         iv_plant.setOnClickListener(new View.OnClickListener() {
->>>>>>> origin/main
             @Override
             public void onClick(View view) {
                 if (exp.getProgress() == 100) {
