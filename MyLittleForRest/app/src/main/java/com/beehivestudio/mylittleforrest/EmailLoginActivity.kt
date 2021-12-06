@@ -60,7 +60,7 @@ class EmailLoginActivity : AppCompatActivity() {
         // Firebase 로그인 통합 관리하는 Object 만들기
         auth = FirebaseAuth.getInstance()
         email_login_button.setOnClickListener{ emailLogin() }
-        phone_sign_in_button.setOnClickListener { startActivity(Intent(this, PhoneLoginActivity::class.java)) }
+//        phone_sign_in_button.setOnClickListener { startActivity(Intent(this, PhoneLoginActivity::class.java)) }
         register_button.setOnClickListener { startActivity(Intent(this, RegisterActivity::class.java)) }
     }
 
