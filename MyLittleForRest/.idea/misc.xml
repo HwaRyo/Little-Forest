@@ -22,13 +22,23 @@
         <entry key="..\:/Users/wjstm/MyLittleForRest/MyLittleForRest/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.22083333333333333" />
 =======
         <entry key="..\:/Users/a98k9/Desktop/Study/Team_Project/MyLittleForRest/MyLittleForRest/app/src/main/res/drawable-v24/grid.xml" value="0.265625" />
-        <entry key="..\:/Users/a98k9/Desktop/Study/Team_Project/MyLittleForRest/MyLittleForRest/app/src/main/res/layout/activity_add_photo.xml" value="0.24947916666666667" />
+        <entry key="..\:/Users/a98k9/Desktop/Study/Team_Project/MyLittleForRest/MyLittleForRest/app/src/main/res/layout/activity_add_photo.xml" value="0.4" />
         <entry key="..\:/Users/a98k9/Desktop/Study/Team_Project/MyLittleForRest/MyLittleForRest/app/src/main/res/layout/activity_book.xml" value="0.24947916666666667" />
+        <entry key="..\:/Users/a98k9/Desktop/Study/Team_Project/MyLittleForRest/MyLittleForRest/app/src/main/res/layout/activity_comment.xml" value="0.24583333333333332" />
+        <entry key="..\:/Users/a98k9/Desktop/Study/Team_Project/MyLittleForRest/MyLittleForRest/app/src/main/res/layout/activity_content_detail.xml" value="0.24583333333333332" />
         <entry key="..\:/Users/a98k9/Desktop/Study/Team_Project/MyLittleForRest/MyLittleForRest/app/src/main/res/layout/activity_loding.xml" value="0.19895833333333332" />
         <entry key="..\:/Users/a98k9/Desktop/Study/Team_Project/MyLittleForRest/MyLittleForRest/app/src/main/res/layout/activity_login.xml" value="0.24947916666666667" />
         <entry key="..\:/Users/a98k9/Desktop/Study/Team_Project/MyLittleForRest/MyLittleForRest/app/src/main/res/layout/activity_main.xml" value="0.225" />
+        <entry key="..\:/Users/a98k9/Desktop/Study/Team_Project/MyLittleForRest/MyLittleForRest/app/src/main/res/layout/activity_phone_login.xml" value="0.24583333333333332" />
+        <entry key="..\:/Users/a98k9/Desktop/Study/Team_Project/MyLittleForRest/MyLittleForRest/app/src/main/res/layout/activity_popup.xml" value="0.24583333333333332" />
+        <entry key="..\:/Users/a98k9/Desktop/Study/Team_Project/MyLittleForRest/MyLittleForRest/app/src/main/res/layout/activity_register.xml" value="0.16666666666666666" />
+        <entry key="..\:/Users/a98k9/Desktop/Study/Team_Project/MyLittleForRest/MyLittleForRest/app/src/main/res/layout/activity_seed.xml" value="0.24947916666666667" />
         <entry key="..\:/Users/a98k9/Desktop/Study/Team_Project/MyLittleForRest/MyLittleForRest/app/src/main/res/layout/fragment_book.xml" value="0.24947916666666667" />
         <entry key="..\:/Users/a98k9/Desktop/Study/Team_Project/MyLittleForRest/MyLittleForRest/app/src/main/res/layout/fragment_book1.xml" value="0.24947916666666667" />
+        <entry key="..\:/Users/a98k9/Desktop/Study/Team_Project/MyLittleForRest/MyLittleForRest/app/src/main/res/layout/fragment_book2.xml" value="0.22" />
+        <entry key="..\:/Users/a98k9/Desktop/Study/Team_Project/MyLittleForRest/MyLittleForRest/app/src/main/res/layout/fragment_book3.xml" value="0.14387031408308004" />
+        <entry key="..\:/Users/a98k9/Desktop/Study/Team_Project/MyLittleForRest/MyLittleForRest/app/src/main/res/layout/fragment_detail.xml" value="0.24583333333333332" />
+        <entry key="..\:/Users/a98k9/Desktop/Study/Team_Project/MyLittleForRest/MyLittleForRest/app/src/main/res/layout/fragment_grid.xml" value="0.24583333333333332" />
         <entry key="..\:/Users/a98k9/Desktop/Study/Team_Project/MyLittleForRest/MyLittleForRest/app/src/main/res/layout/fragment_main.xml" value="0.225" />
         <entry key="..\:/Users/a98k9/Desktop/Study/Team_Project/MyLittleForRest/MyLittleForRest/app/src/main/res/layout/fragment_mission.xml" value="0.24947916666666667" />
         <entry key="..\:/Users/a98k9/Desktop/Study/Team_Project/MyLittleForRest/MyLittleForRest/app/src/main/res/layout/fragment_user.xml" value="0.24947916666666667" />

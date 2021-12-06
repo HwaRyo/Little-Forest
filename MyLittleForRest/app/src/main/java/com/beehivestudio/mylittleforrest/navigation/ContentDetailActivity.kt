@@ -1,10 +1,14 @@
 package com.beehivestudio.mylittleforrest
 
+import android.app.Activity
+import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -15,21 +19,26 @@ import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ListenerRegistration
 import kotlinx.android.synthetic.main.activity_content_detail.*
+import kotlinx.android.synthetic.main.fragment_user.view.*
 import kotlinx.android.synthetic.main.item_comment.view.*
 import kotlinx.android.synthetic.main.item_detail.view.*
+import java.lang.Exception
 
 
 class ContentDetailActivity : AppCompatActivity() {
 
-
     var user: FirebaseUser? = null
     var content_commentSnapshot: ListenerRegistration? = null
     var firestore: FirebaseFirestore? = null
+    var uid: String? = null
+    var contentUid = ""
+    var selectOption = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_content_detail)
 
+        uid = FirebaseAuth.getInstance().currentUser?.uid.toString()
         user = FirebaseAuth.getInstance().currentUser
 
         content_detailviewitem_explain_textview.setText(intent.getStringExtra("explain"))
@@ -55,8 +64,49 @@ class ContentDetailActivity : AppCompatActivity() {
                 .document()
                 .set(comment)
 
+            content_comment_edit_message.setText("")
+
         }
 
+        content_toolbar_btn_back.setOnClickListener {
+            onBackPressed()
+        }
+
+
+        try {
+            selectOption = intent.getStringExtra("selectOption")!!
+        } catch (e: Exception) {
+            selectOption = "images"
+        }
+
+        val docRef =
+            FirebaseFirestore.getInstance().collection(selectOption)
+                .document(intent.getStringExtra("contentUid")!!)
+        docRef.get()
+            .addOnSuccessListener { document ->
+                if (document != null) {
+                    contentUid = document.getString("uid")!!
+                }
+            }
+
+        content_toolbar_btn_delete.setOnClickListener {
+            if (uid.equals(contentUid)) {
+                val deletePopup = Intent(this, PopupActivity::class.java)
+                deletePopup.putExtra("menu", "delete")
+                deletePopup.putExtra("contentUid", intent.getStringExtra("contentUid")!!)
+                deletePopup.putExtra("selectOption", selectOption)
+                startActivityForResult(deletePopup, 1)
+            }
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == 1) {
+            if (resultCode == Activity.RESULT_OK) {
+                finish()
+            }
+        }
     }
 
     override fun onStop() {
@@ -65,7 +115,8 @@ class ContentDetailActivity : AppCompatActivity() {
     }
 
 
-    inner class content_CommentRecyclerViewAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+    inner class content_CommentRecyclerViewAdapter :
+        RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         val content_comments: ArrayList<ContentDTO.Comment>
 
         init {
@@ -107,7 +158,8 @@ class ContentDetailActivity : AppCompatActivity() {
                         val url = documentSnapshot?.data!!["image"]
                         Glide.with(holder.itemView.context)
                             .load(url)
-                            .apply(RequestOptions().circleCrop()).into(view.commentviewitem_imageview_profile)
+                            .apply(RequestOptions().circleCrop())
+                            .into(view.commentviewitem_imageview_profile)
                     }
                 }
 

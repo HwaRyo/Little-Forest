@@ -84,7 +84,7 @@ class GridFragment : Fragment() {
 
                 bundle.putString("destinationUid", contentDTOs[position].uid)
                 bundle.putString("userId", contentDTOs[position].userId)
-
+                bundle.putString("menu","Search")
                 fragment.arguments = bundle
                 activity!!.supportFragmentManager.beginTransaction()
                     .replace(R.id.main_content, fragment)

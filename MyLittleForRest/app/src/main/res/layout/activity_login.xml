@@ -8,7 +8,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@id/signin_layout"
-        android:gravity="center">
+        android:gravity="center"
+        android:orientation="vertical">
+
 
         <ImageView
             android:id="@+id/image_logo"
@@ -21,6 +23,10 @@
             android:layout_marginBottom="50dp"
             android:contentDescription="@string/app_name"
             android:src="@drawable/applogo" />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="70dp"
+            android:src="@drawable/wordlogo2"/>
     </LinearLayout>
     <ProgressBar
         android:id="@+id/progress_bar"
@@ -41,8 +47,8 @@
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="20dp"
-            android:layout_marginStart="20dp">
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp">
 
             <EditText
                 android:id="@+id/email_edittext"
@@ -56,8 +62,8 @@
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="20dp"
-            android:layout_marginStart="20dp">
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp">
 
             <EditText
                 android:id="@+id/password_edittext"
@@ -71,25 +77,32 @@
             android:id="@+id/email_login_button"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:layout_marginBottom="35dp"
-            android:layout_marginEnd="20dp"
             android:layout_marginStart="20dp"
             android:layout_marginTop="15dp"
-            android:text="@string/signin_email"/>
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="15dp"
+            android:text="EMAIL LOGIN" />
 
+
+<!--        <Button-->
+<!--            android:id="@+id/phone_sign_in_button"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="40dp"-->
+<!--            android:layout_marginStart="20dp"-->
+<!--            android:layout_marginEnd="20dp"-->
+<!--            android:layout_marginBottom="15dp"-->
+<!--            android:text="PHONE LOGIN"-->
+<!--            android:textColor="@color/black" />-->
 
         <Button
-            android:id="@+id/phone_sign_in_button"
+            android:id="@+id/register_button"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
-            android:layout_marginBottom="5dp"
-            android:text="PHONE LOGIN"
+            android:layout_marginBottom="100dp"
+            android:text="REGISTER"
             android:textColor="@color/black" />
-
-      
-
 
 
     </LinearLayout>

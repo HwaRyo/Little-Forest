@@ -16,6 +16,7 @@ import androidx.appcompat.widget.LinearLayoutCompat
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.BlendModeColorFilterCompat
 import androidx.core.graphics.BlendModeCompat
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -43,7 +44,7 @@ class UserFragment : Fragment() {
     var followingListenerRegistration: ListenerRegistration? = null
     var followListenerRegistration: ListenerRegistration? = null
     var data_document: ArrayList<String> = arrayListOf()
-
+    val menu = arguments?.getString("menu")?:"Community"
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -70,11 +71,17 @@ class UserFragment : Fragment() {
             var mainactivity = (activity as MainActivity)
             mainactivity?.toolbar_username?.text = arguments?.getString("userId")
             mainactivity?.toolbar_btn_back?.setOnClickListener {
-                mainactivity.bottom_navigation.selectedItemId = R.id.action_community
-                mainactivity?.toolbar_title_image?.visibility = View.VISIBLE
-                mainactivity?.toolbar_username?.visibility = View.GONE
-                mainactivity?.toolbar_btn_back?.visibility = View.GONE
-
+                if(menu.equals("Search")){
+                    mainactivity.bottom_navigation.selectedItemId = R.id.action_search
+                    mainactivity?.toolbar_title_image?.visibility = View.VISIBLE
+                    mainactivity?.toolbar_username?.visibility = View.GONE
+                    mainactivity?.toolbar_btn_back?.visibility = View.GONE
+                }else {
+                    mainactivity.bottom_navigation.selectedItemId = R.id.action_community
+                    mainactivity?.toolbar_title_image?.visibility = View.VISIBLE
+                    mainactivity?.toolbar_username?.visibility = View.GONE
+                    mainactivity?.toolbar_btn_back?.visibility = View.GONE
+                }
             }
             mainactivity?.toolbar_title_image?.visibility = View.GONE
             mainactivity?.toolbar_username?.visibility = View.VISIBLE
@@ -309,6 +316,11 @@ class UserFragment : Fragment() {
                 nextIntent.putExtra("favoriteCount", contentDTOs[position].favoriteCount)
                 nextIntent.putExtra("contentUid", data_document.get(position))
                 nextIntent.putExtra("destinationUid", contentDTOs[position].uid)
+                if(fragmentView?.user_rb_public?.isChecked==true){
+                    nextIntent.putExtra("selectOption", "images")
+                }else{
+                    nextIntent.putExtra("selectOption", "private")
+                }
                 startActivity(nextIntent)
             }
         }

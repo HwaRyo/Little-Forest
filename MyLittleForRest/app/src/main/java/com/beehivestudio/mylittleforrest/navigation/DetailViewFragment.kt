@@ -17,6 +17,7 @@ import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ListenerRegistration
 import com.squareup.okhttp.OkHttpClient
+import kotlinx.android.synthetic.main.activity_content_detail.*
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.item_detail.view.*
 import kotlinx.android.synthetic.main.fragment_detail.view.*
@@ -41,6 +42,7 @@ class DetailViewFragment : Fragment() {
 
         //리사이클러 뷰와 어뎁터랑 연결
         mainView = inflater.inflate(R.layout.fragment_detail, container, false)
+
 
         return mainView
     }
@@ -147,11 +149,6 @@ class DetailViewFragment : Fragment() {
             // 설명 텍스트
             viewHolder.detailviewitem_explain_textview.text = contentDTOs[position].explain
 
-            viewHolder.detailviewitem_comment_imageview.setOnClickListener{v ->
-                var intent = Intent(v.context,CommentActivity::class.java)
-                intent.putExtra("contentUid",contentUidList[position])
-                startActivity(intent)
-            }
 
             viewHolder.detailviewitem_imageview_content.setOnClickListener {
                 val nextIntent = Intent(holder.itemView.context, ContentDetailActivity::class.java)

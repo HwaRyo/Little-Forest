@@ -63,13 +63,14 @@
                 android:src="@drawable/sunflower" />
 
             <ImageButton
-                android:id="@+id/rosemoss"
+                android:id="@+id/cosmos"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:adjustViewBounds="true"
                 android:background="@drawable/grid"
                 android:scaleType="fitCenter"
-                android:src="@drawable/rosemoss" />
+                android:src="@drawable/cosmos" />
+
 
             <ImageButton
                 android:id="@+id/forsythia"
@@ -90,13 +91,14 @@
                 android:src="@drawable/tulip" />
 
             <ImageButton
-                android:id="@+id/cosmos"
+                android:id="@+id/rosemoss"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:adjustViewBounds="true"
                 android:background="@drawable/grid"
                 android:scaleType="fitCenter"
-                android:src="@drawable/cosmos" />
+                android:src="@drawable/rosemoss" />
+
 
             <ImageButton
                 android:id="@+id/valley"

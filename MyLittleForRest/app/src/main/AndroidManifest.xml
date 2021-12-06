@@ -18,11 +18,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.LittleForest"
         android:usesCleartextTraffic="true">
-        <activity android:name=".BookActivity"></activity>
+        <activity android:name=".RegisterActivity" />
+        <activity android:name=".BookActivity" />
         <activity android:name=".ContentDetailActivity" />
         <activity android:name=".PhoneLoginActivity" />
         <activity android:name=".LodingActivity" />
         <activity android:name=".SeedActivity" />
+        <activity
+            android:name=".PopupActivity"
+            android:theme="@android:style/Theme.Dialog" />
         <activity android:name=".MainActivity" />
         <activity android:name=".EmailLoginActivity">
             <intent-filter>
@@ -32,7 +36,6 @@
             </intent-filter>
         </activity>
         <activity android:name=".AddPhotoActivity" />
-        <activity android:name=".CommentActivity" />
     </application>
 
 </manifest>

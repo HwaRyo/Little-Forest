@@ -61,7 +61,6 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
 //                }
 //                return true
 //            }
-
             R.id.action_mission -> {
                 val missionFragment = MissionFragment()
                 supportFragmentManager.beginTransaction()

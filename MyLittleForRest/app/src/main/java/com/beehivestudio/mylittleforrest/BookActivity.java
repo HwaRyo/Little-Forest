@@ -8,6 +8,8 @@ import androidx.viewpager2.adapter.FragmentStateAdapter;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 
 import com.beehivestudio.mylittleforrest.book.BookFragment;
 import com.beehivestudio.mylittleforrest.book.BookFragment1;
@@ -29,11 +31,20 @@ public class BookActivity extends AppCompatActivity {
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
     String uid = user.getUid();
+    private View back;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_book);
+
+        back = findViewById(R.id.book_toolbar_btn_back);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
 
         db.collection("Book").document(uid).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
@@ -66,8 +77,6 @@ public class BookActivity extends AppCompatActivity {
         @NonNull
         @Override
         public Fragment createFragment(int position) {
-
-
             if (position == 0) return new BookFragment();
             else if (position == 1) return new BookFragment1();
             else if (position == 2) return new BookFragment2();

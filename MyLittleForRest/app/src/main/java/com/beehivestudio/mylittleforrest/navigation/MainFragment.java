@@ -32,6 +32,7 @@ import android.widget.Toast;
 
 import com.beehivestudio.mylittleforrest.AddPhotoActivity;
 import com.beehivestudio.mylittleforrest.MainActivity;
+import com.beehivestudio.mylittleforrest.PopupActivity;
 import com.beehivestudio.mylittleforrest.R;
 import com.beehivestudio.mylittleforrest.SeedActivity;
 import com.bumptech.glide.Glide;
@@ -131,7 +132,7 @@ public class MainFragment extends Fragment {
                     String weather = document.getString("weather");
                     //도시
                     String city = document.getString("city");
-                    region.setText("지역 : " + city + "\n온도 : " + temperature + "ºC\n습도 : " + humidity + "%\n기상 : " + weather);
+                    region.setText("지역 : " + city + "\n온도 : " + temperature + "℃\n습도 : " + humidity + "%\n기상 : " + weather);
                     if (weather.equals("Clouds")||weather.equals("Mist")) {
                         back.setBackgroundResource(R.drawable.clooudbackground);
                         Glide.with(getContext())
@@ -204,9 +205,9 @@ public class MainFragment extends Fragment {
                                 Glide.with(root.getContext())
                                         .load(R.drawable.sunflower)
                                         .into(iv_plant);
-                            else if (species.equals("rosemoss"))
+                            else if (species.equals("cosmos"))
                                 Glide.with(root.getContext())
-                                        .load(R.drawable.rosemoss)
+                                        .load(R.drawable.cosmos)
                                         .into(iv_plant);
                             //업데이트용
 //                            else if (species.equals("forsythia"))
@@ -243,15 +244,11 @@ public class MainFragment extends Fragment {
                         Glide.with(root.getContext())
                                 .load(R.drawable.death)
                                 .into(iv_plant);
-                        iv_plant.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                Toast.makeText(root.getContext(), "꽃이 시들었습니다. 다시키워주세요.", Toast.LENGTH_SHORT).show();
 
-                                Intent intent = new Intent(root.getContext(), SeedActivity.class);
-                                startActivity(intent);
-                            }
-                        });
+                        Intent popup = new Intent(root.getContext(), PopupActivity.class);
+                        popup.putExtra("menu","main");
+                        startActivity(popup);
+
                     }
                 } else {/*파베에서 데이터 가져오기 실패할때*/}
             }
@@ -266,9 +263,10 @@ public class MainFragment extends Fragment {
                     Intent intent = new Intent(root.getContext(), SeedActivity.class);
                     startActivity(intent);
                 }
-                //죽은식물일때 if 만들기
             }
         });
+
+
 
         upload.setOnClickListener(new View.OnClickListener() {
             @Override
