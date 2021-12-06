@@ -95,6 +95,9 @@ class AddPhotoActivity : AppCompatActivity() {
 
             //Insert userId
             contentDTO.userId = auth?.currentUser?.email
+            if(contentDTO.userId.isNullOrEmpty()){
+                contentDTO.userId = auth?.currentUser?.phoneNumber
+            }
 
             //Insert explain of content
             contentDTO.explain = addphoto_edit_explain.text.toString()

@@ -44,7 +44,6 @@ class UserFragment : Fragment() {
     var followingListenerRegistration: ListenerRegistration? = null
     var followListenerRegistration: ListenerRegistration? = null
     var data_document: ArrayList<String> = arrayListOf()
-    val menu = arguments?.getString("menu")?:"Community"
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -69,7 +68,10 @@ class UserFragment : Fragment() {
             //OtherUserPage
             fragmentView?.account_btn_follow_signout?.text = getString(follow)
             var mainactivity = (activity as MainActivity)
+            val menu = arguments?.getString("menu")
+
             mainactivity?.toolbar_username?.text = arguments?.getString("userId")
+
             mainactivity?.toolbar_btn_back?.setOnClickListener {
                 if(menu.equals("Search")){
                     mainactivity.bottom_navigation.selectedItemId = R.id.action_search

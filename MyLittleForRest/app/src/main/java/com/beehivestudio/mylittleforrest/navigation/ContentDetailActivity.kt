@@ -53,6 +53,9 @@ class ContentDetailActivity : AppCompatActivity() {
             val comment = ContentDTO.Comment()
 
             comment.userId = FirebaseAuth.getInstance().currentUser!!.email
+            if(comment.userId.isNullOrEmpty()){
+                comment.userId = FirebaseAuth.getInstance().currentUser!!.phoneNumber
+            }
             comment.comment = content_comment_edit_message.text.toString()
             comment.uid = FirebaseAuth.getInstance().currentUser!!.uid
             comment.timestamp = System.currentTimeMillis()

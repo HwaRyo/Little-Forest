@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -54,6 +55,7 @@ public class PhoneLoginActivity extends AppCompatActivity {
         Button phone_snumber_btn = findViewById(R.id.phone_snumber_btn);
         TextView phone_resnumber_tv = findViewById(R.id.phone_resnumber_tv);
         TextView phone_snumber_text = findViewById(R.id.phone_snumber_text);
+        ImageView back_btn = findViewById(R.id.phone_login_toolbar_btn_back);
 
         firebaseAuth = FirebaseAuth.getInstance();
 
@@ -64,6 +66,13 @@ public class PhoneLoginActivity extends AppCompatActivity {
         pd.setTitle("잠시만 기다려주세요...");
         pd.setCanceledOnTouchOutside(false);
 
+        back_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
+
         mCallback = new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
             @Override
             public void onVerificationCompleted(@NonNull PhoneAuthCredential phoneAuthCredential) {
@@ -73,7 +82,7 @@ public class PhoneLoginActivity extends AppCompatActivity {
             @Override
             public void onVerificationFailed(@NonNull FirebaseException e) {
                 pd.dismiss();
-                Toast.makeText(PhoneLoginActivity.this, ""+e.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(PhoneLoginActivity.this, "핸드폰 번호를 정확히 입력해주세요.", Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -121,7 +130,7 @@ public class PhoneLoginActivity extends AppCompatActivity {
         phone_snumber_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String code = phone_snumber_btn.getText().toString().trim();
+                String code = phone_snumber_et.getText().toString().trim();
                 if(TextUtils.isEmpty(code)){
                     Toast.makeText(PhoneLoginActivity.this, "인증번호를 입력해주세요.", Toast.LENGTH_SHORT).show();
                 }else{
@@ -134,7 +143,6 @@ public class PhoneLoginActivity extends AppCompatActivity {
     private void startPhoneNumberVerification(String phone) {
         pd.setMessage("전화번호 확인중...");
         pd.show();
-
 
         PhoneAuthOptions options =
                 PhoneAuthOptions.newBuilder(firebaseAuth)
@@ -152,7 +160,7 @@ public class PhoneLoginActivity extends AppCompatActivity {
 
         PhoneAuthOptions options =
                 PhoneAuthOptions.newBuilder(firebaseAuth)
-                        .setPhoneNumber("+821039406993")
+                        .setPhoneNumber(phone)
                         .setTimeout(60L, TimeUnit.SECONDS)
                         .setActivity(this)
                         .setCallbacks(mCallback)
@@ -182,14 +190,14 @@ public class PhoneLoginActivity extends AppCompatActivity {
                         String phone = firebaseAuth.getCurrentUser().getPhoneNumber();
                         Toast.makeText(PhoneLoginActivity.this, "접속중...", Toast.LENGTH_SHORT).show();
 
-                        startActivity(new Intent(PhoneLoginActivity.this, MainActivity.class));
+                        startActivity(new Intent(PhoneLoginActivity.this, LodingActivity.class));
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
                         pd.dismiss();
-                        Toast.makeText(PhoneLoginActivity.this, ""+e.getMessage(),Toast.LENGTH_SHORT).show();
+                        Toast.makeText(PhoneLoginActivity.this, "인증번호가 다릅니다.",Toast.LENGTH_SHORT).show();
                     }
                 });
     }

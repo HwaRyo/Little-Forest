@@ -55,4 +55,5 @@
     <item name="masked" type="id" />
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="resend"><u>재전송이 필요하신가요?</u></string>
 </resources>

@@ -3,7 +3,41 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".PhoneLoginActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/phone_login_my_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:layout_alignParentTop="true">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/phone_login_toolbar_title_image"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:layout_marginStart="3dp"
+                android:layout_marginTop="3dp"
+                android:layout_marginEnd="3dp"
+                android:layout_marginBottom="3dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/wordlogo2" />
+
+            <ImageView
+                android:id="@+id/phone_login_toolbar_btn_back"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="22dp"
+                android:src="@drawable/ic_arrow_back" />
+        </RelativeLayout>
+    </androidx.appcompat.widget.Toolbar>
 
     <LinearLayout
         android:id="@+id/phone_lo"
@@ -13,7 +47,7 @@
         android:padding="10dp"
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="0dp"
-        android:background="#eeeeee">
+        android:background="@drawable/loding2">
 
         <ImageView
             android:id="@+id/phone_img"
@@ -53,8 +87,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="10dp"
-                android:background="@color/white"
-                android:hint="+82xxxxxxxxxxx"
+                android:hint="+82 1012345678"
+                android:maxLength="13"
                 android:inputType="phone"
                 android:textAlignment="center"
                 android:textColor="#000"
@@ -98,8 +132,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="10dp"
-                android:background="@color/white"
-                android:hint="xxxxxx"
+                android:hint="123456"
+                android:maxLength="6"
                 android:inputType="phone"
                 android:textAlignment="center"
                 android:textColor="#000"
@@ -113,8 +147,8 @@
                 android:layout_gravity="center_horizontal"
                 android:textAlignment="center"
                 android:gravity="center"
-                android:text="재전송이 필요하신가요?"
-                android:textColor="#777777" />
+                android:text="@string/resend"
+                android:textColor="#0738CA" />
 
             <Button
                 android:id="@+id/phone_snumber_btn"
