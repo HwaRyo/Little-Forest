@@ -1,4 +1,5 @@
 # [식물 육성 다이어리 및 커뮤니티 통한 코로나블루 및 우울증 심리치료 어플리케이션](github.com/HwaRyo/My_Little_For_Rest)
+- 일상 속에서 떠나는 나를 위한 휴식공간🧑‍🤝‍🧑
 
 # Stack
 <div align=center> 
