@@ -4,8 +4,6 @@
    <img src="http://img.shields.io/badge/-Kotlin-7F52FF?style=flat&logo=Kotlin&logoColor=white">
    <img src="http://img.shields.io/badge/-Firebase-FFCA28?style=flat&logo=Firebase&logoColor=white">
 </div>
-- 일상 속에서 떠나는 나를 위한 휴식공간🧑‍🤝‍🧑
-
 
 # My Little For Rest와 함께라면...
 - 우울감, 무기력함 감소
